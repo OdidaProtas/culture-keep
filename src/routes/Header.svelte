@@ -25,12 +25,12 @@
 			<li aria-current={$page.url.pathname.startsWith('/define') ? 'page' : undefined}>
 				<a href="/define">Define</a>
 			</li>
-			<!-- <li aria-current={$page.url.pathname.startsWith('/variations') ? 'page' : undefined}>
-				<a href="/variations">Variations</a>
+			<!-- <li aria-current={$page.url.pathname.startsWith('/blog') ? 'page' : undefined}>
+				<a href="/blog">Blog</a>
 			</li> -->
-			<!-- <li aria-current={$page.url.pathname.startsWith('/variations') ? 'page' : undefined}>
-				<a href="/variations">Blog</a>
-			</li> -->
+			<li aria-current={$page.url.pathname.startsWith('/store') ? 'page' : undefined}>
+				<a href="/store">Store</a>
+			</li>
 		
 		</ul>
 		<svg viewBox="0 0 2 3" aria-hidden="true">

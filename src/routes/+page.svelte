@@ -24,7 +24,7 @@
 			Inspired by JUOGI. REDISCOVERING HISTORY, CULTURE & FOLKLORE of the LUO of East & Central
 			Africa
 		</p>
-		<form action="/search" >
+		<form action="/search">
 			<label
 				for="default-search"
 				class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label
@@ -60,6 +60,14 @@
 					>Search</button
 				>
 			</div>
+			<div class="mt-10, pt-10">
+				<div class="card w-full bg-primary text-primary-content pt-10">
+					<div class="card-body">
+						<h2 class="card-title">Card title!</h2>
+						<p>If a dog chews shoes whose shoes does he choose?</p>
+					</div>
+				</div>
+			</div>
 		</form>
 	</span>
 </section>
@@ -84,6 +92,4 @@
 		height: 0;
 		padding: 0 0 calc(100% * 495 / 2048) 0;
 	}
-
-	
 </style>

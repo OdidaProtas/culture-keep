@@ -3,6 +3,14 @@
 
 	/** @type {import('./$types').ActionData} */
 	export let form;
+
+	let state = {
+		type: 'word'
+	};
+
+	function handleChange(e) {
+		state = { ...state, [e.target.name]: e.target.value };
+	}
 </script>
 
 <svelte:head>
@@ -30,9 +38,31 @@
 
 	<form method="POST" class="mt-5">
 		<div class="mb-6">
-			<label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-500"
-				>Word</label
+			<label for="type" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-500"
+				>Definition type</label
 			>
+			<select
+				on:change={handleChange}
+				value={state.type}
+				id="type"
+				name="type"
+				class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+			>
+				<option selected value="word">Word</option>
+				<option value="phrase">Phrase i.e Proverb</option>
+			</select>
+		</div>
+		<div class="mb-6">
+			{#if state.type === 'word'}
+				<label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-500"
+					>Word to define</label
+				>
+			{/if}
+			{#if state.type === 'phrase'}
+				<label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-500"
+					>Phrase to define</label
+				>
+			{/if}
 			<input
 				class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 				placeholder="Type the word to define"
