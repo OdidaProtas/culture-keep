@@ -1,4 +1,12 @@
+<script>
+    function closeCart(){
+        history.back()
+    }
+</script>
+
+
 <div class="relative z-10" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
+
 	<!--
       Background backdrop, show/hide based on slide-over state.
   
@@ -32,7 +40,7 @@
 									Shopping cart
 								</h2>
 								<div class="ml-3 flex h-7 items-center">
-									<button type="button" class="-m-2 p-2 text-gray-400 hover:text-gray-500">
+									<button on:click={closeCart} type="button" class="-m-2 p-2 text-gray-400 hover:text-gray-500">
 										<span class="sr-only">Close panel</span>
 										<!-- Heroicon name: outline/x-mark -->
 										<svg
