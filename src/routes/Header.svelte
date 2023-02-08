@@ -29,20 +29,19 @@
 			<li aria-current={$page.url.pathname.startsWith('/store') ? 'page' : undefined}>
 				<a href="/store">Store</a>
 			</li>
-		
 		</ul>
 		<svg viewBox="0 0 2 3" aria-hidden="true">
 			<path d="M0,0 L0,3 C0.5,3 0.5,3 1,2 L2,0 Z" />
 		</svg>
 	</nav>
 
-
 	<div class="corner pr-2">
 		<a href="/store/checkout">
-			Basket
-			<!-- <img src={logo} alt="SvelteKit" /> -->
+			<!-- svelte-ignore a11y-missing-attribute -->
+			<img src="https://img.icons8.com/color/30/null/shopping-cart--v1.png" />
 		</a>
-	</div></header>
+	</div>
+</header>
 
 <style>
 	header {

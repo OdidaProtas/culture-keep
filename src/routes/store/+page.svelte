@@ -1,3 +1,8 @@
+<script>
+	import { page } from '$app/stores';
+	let q = $page.url.searchParams.get('q');
+</script>
+
 <section class="p-6 dark:bg-gray-800 dark:text-gray-100">
 	<div class="container grid gap-6 mx-auto text-center lg:grid-cols-2 xl:grid-cols-5">
 		<div class="w-full px-6 py-16 rounded-md sm:px-12 md:px-16 xl:col-span-2 dark:bg-gray-900">
@@ -6,7 +11,7 @@
 
 			<form action="" class="self-stretch space-y-3 ng-untouched ng-pristine ng-valid pt-28">
 				<a
-					href="/store/c/mugs"
+					href={`/store/c/mugs${q ? `?q=${q}` : ''}`}
 					class="btn w-full p-4 font-semibold rounded dark:bg-violet-400 dark:text-gray-900"
 					>Buy mugs</a
 				>
@@ -31,7 +36,7 @@
 
 			<div class="flex mt-6 flex-wrap justify-center">
 				<a
-					href="/store/c/tshirts"
+					href={`/store/c/tshirts${q ? `?q=${q}` : ''}`}
 					class="px-8 py-3 m-2 text-lg font-semibold rounded dark:bg-gray-800 dark:text-gray-50"
 					>Buy Tshirts</a
 				>
@@ -68,7 +73,7 @@
 			>
 				<a
 					rel="noopener noreferrer"
-					href="/store/c/hoodies"
+					href={`/store/c/hoodies${q ? `?q=${q}` : ''}`}
 					class="px-8 py-3 text-lg font-semibold rounded dark:bg-violet-400 dark:text-gray-900"
 					>Buy hoodies</a
 				>

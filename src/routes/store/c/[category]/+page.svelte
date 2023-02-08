@@ -3,25 +3,52 @@
 	import Counter from '../../../Counter.svelte';
 
 	let variation = 'blue';
-	let variations = {
-		blue: 'https://images.teemill.com/la8r55g9t4xaqj4e5klhejjqpglbl08erqtjsdwhcgnt6sov.png.png?w=1080&h=auto',
-		red: 'https://images.teemill.com/la8r55g9t4xaqj4e5klhejjqpglbl08erqtjsdwhcgnt6sov.png.png?w=1080&h=auto',
-		green:
-			'https://images.teemill.com/la8r55g9t4xaqj4e5klhejjqpglbl08erqtjsdwhcgnt6sov.png.png?w=1080&h=auto'
+	let stock = {
+		tshirts: {
+			blue: 'https://images.teemill.com/la8r55g9t4xaqj4e5klhejjqpglbl08erqtjsdwhcgnt6sov.png.png?w=1080&h=auto',
+			red: 'https://images.teemill.com/la8r55g9t4xaqj4e5klhejjqpglbl08erqtjsdwhcgnt6sov.png.png?w=1080&h=auto',
+			green:
+				'https://images.teemill.com/la8r55g9t4xaqj4e5klhejjqpglbl08erqtjsdwhcgnt6sov.png.png?w=1080&h=auto'
+		},
+		mugs: {
+			white: 'https://m.media-amazon.com/images/I/61DTd54+QUL._AC_SX425_.jpg',
+			blue: 'https://m.media-amazon.com/images/I/61DTd54+QUL._AC_SX425_.jpg'
+		},
+		hoodies: {
+			blue: 'https://havencraft.co.ke/wp-content/uploads/2021/03/Royal-Blue-Front-3.png'
+		}
 	};
-	let basket = [];
-	let colors = ['red', 'green', 'red', 'yellow', 'white', 'black'];
+	import { page } from '$app/stores';
+	const isMug = $page.url.pathname.includes('/mugs');
+	const isTshirts = $page.url.pathname.includes('/tshirts');
+	const isHoodies = $page.url.pathname.includes('/hoodies');
 </script>
 
 <div class="flex justify-start lg:inline">
 	<div class="bg-white flex-1 p-2">
 		<div class="group relative">
 			<div class="min-h-80 w-full  rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none ">
-				<img
-					src={variations[variation]}
-					alt="Front of men&#039;s Basic Tee in black."
-					class="h-full w-full object-cover object-center lg:h-full lg:w-full"
-				/>
+				{#if isTshirts}
+					<img
+						src={stock.tshirts[variation]}
+						alt="Front of men&#039;s Basic Tee in black."
+						class="h-full w-full object-cover object-center lg:h-full lg:w-full"
+					/>
+				{/if}
+				{#if isMug}
+					<img
+						src={stock.mugs[variation]}
+						alt="Front of men&#039;s Basic Tee in black."
+						class="h-full w-full object-cover object-center lg:h-full lg:w-full"
+					/>
+				{/if}
+				{#if isHoodies}
+					<img
+						src={stock.hoodies[variation]}
+						alt="Front of men&#039;s Basic Tee in black."
+						class="h-full w-full object-cover object-center lg:h-full lg:w-full"
+					/>
+				{/if}
 			</div>
 			<div class="mt-4 flex justify-between">
 				<div>
@@ -35,7 +62,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="bg-white flex-1 ml-2 p-2">
+	<div class="bg-white flex-1 ml-2 p-2 mt-9">
 		<h3>Customize your order</h3>
 		<div class="my-6">
 			<label for="word" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-500"
@@ -64,7 +91,7 @@
 		</div>
 	</div>
 </div>
-<div class="flex justify-between">
+<!-- <div class="flex justify-between">
 	{#each Object.keys(variations) as variation}
 		<button
 			key={variation}
@@ -72,7 +99,7 @@
 			>{variation}</button
 		>
 	{/each}
-</div>
+</div> -->
 
 <Counter />
 <div class="mt-6 flex justify-between">
