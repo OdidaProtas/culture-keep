@@ -22,7 +22,7 @@
 	</div>
 {/if}
 
-{#if !q}
+{#if (!q)} 
 	<div class="bg-white">
 		<main>
 			<div class="relative px-3">

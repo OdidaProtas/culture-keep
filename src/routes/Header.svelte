@@ -36,7 +36,7 @@
 	</nav>
 
 	<div class="corner pr-2">
-		<a href="/store/checkout">
+		<a href="/store/basket">
 			<!-- svelte-ignore a11y-missing-attribute -->
 			<img src="https://img.icons8.com/color/30/null/shopping-cart--v1.png" />
 		</a>
