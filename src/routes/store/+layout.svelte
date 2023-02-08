@@ -1,3 +1,9 @@
+<script>
+	/** @type {import('./$types').PageData} */
+	export let data;
+	console.log(data)
+</script>
+
 <svelte:head>
 	<title>Store</title>
 </svelte:head>

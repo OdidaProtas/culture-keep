@@ -1,12 +1,19 @@
 <script>
 	// @ts-nocheck
+	import Counter from '../../../Counter.svelte';
+
 	let variation = 'blue';
 	let variations = {
-		blue: 'https://images.teemill.com/la8r55g9t4xaqj4e5klhejjqpglbl08erqtjsdwhcgnt6sov.png.png?w=1080&h=auto'
+		blue: 'https://images.teemill.com/la8r55g9t4xaqj4e5klhejjqpglbl08erqtjsdwhcgnt6sov.png.png?w=1080&h=auto',
+		red: 'https://images.teemill.com/la8r55g9t4xaqj4e5klhejjqpglbl08erqtjsdwhcgnt6sov.png.png?w=1080&h=auto',
+		green:
+			'https://images.teemill.com/la8r55g9t4xaqj4e5klhejjqpglbl08erqtjsdwhcgnt6sov.png.png?w=1080&h=auto'
 	};
+	let basket = [];
+	let colors = ['red', 'green', 'red', 'yellow', 'white', 'black'];
 </script>
 
-<div class="flex justify-start">
+<div class="flex justify-start lg:inline">
 	<div class="bg-white flex-1 p-2">
 		<div class="group relative">
 			<div class="min-h-80 w-full  rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none ">
@@ -19,10 +26,8 @@
 			<div class="mt-4 flex justify-between">
 				<div>
 					<h3 class="text-sm text-gray-700">
-						<a href="/">
-							<span aria-hidden="true" class="absolute inset-0" />
-							Basic Tee
-						</a>
+						<span aria-hidden="true" class="absolute inset-0" />
+						Basic Tee
 					</h3>
 					<p class="mt-1 text-sm text-gray-500">Black</p>
 				</div>
@@ -46,7 +51,8 @@
 		<div class="my-6">
 			<label
 				for="definition"
-				class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-500">Definition (Back)</label
+				class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-500"
+				>Definition (Back)</label
 			>
 			<textarea
 				id="definition"
@@ -58,17 +64,25 @@
 		</div>
 	</div>
 </div>
+<div class="flex justify-between">
+	{#each Object.keys(variations) as variation}
+		<button
+			key={variation}
+			class={`btn ml-2 text-white bg-${variation}-700 hover:bg-${variation}-800 focus:ring-4 focus:outline-none focus:ring-${variation}-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-${variation}-600 dark:hover:bg-${variation}-700 dark:focus:ring-${variation}-800`}
+			>{variation}</button
+		>
+	{/each}
+</div>
 
-<!-- <div>
-	{#each variant in Object.keys(variations)}
-	<button>{variant}</button>
-{/each}
-</div> -->
+<Counter />
 <div class="mt-6 flex justify-between">
-	<button
-		class="btn text-white w-full  bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-		>Buy now</button
-	>
+	<form action="/store/checkout">
+		<button
+			class="btn text-white w-full  bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+			>Buy now</button
+		>
+	</form>
+
 	<button
 		class="btn ml-2 w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
 		>Add to basket</button

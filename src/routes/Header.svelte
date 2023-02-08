@@ -38,8 +38,13 @@
 		</svg>
 	</nav>
 
-	<div />
-</header>
+
+	<div class="corner pr-2">
+		<a href="/store/checkout">
+			Basket
+			<!-- <img src={logo} alt="SvelteKit" /> -->
+		</a>
+	</div></header>
 
 <style>
 	header {

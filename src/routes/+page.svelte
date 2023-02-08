@@ -1,7 +1,8 @@
 <script>
-	import Counter from './Counter.svelte';
-	import welcome from '$lib/images/svelte-welcome.webp';
-	import welcome_fallback from '$lib/images/svelte-welcome.png';
+	export let data = {};
+
+	// @ts-ignore
+	const { words = [] } = data;
 </script>
 
 <svelte:head>
@@ -60,14 +61,26 @@
 					>Search</button
 				>
 			</div>
-			<div class="mt-10, pt-10">
-				<div class="card w-full bg-primary text-primary-content pt-10">
-					<div class="card-body">
-						<h2 class="card-title">Card title!</h2>
-						<p>If a dog chews shoes whose shoes does he choose?</p>
-					</div>
-				</div>
+			<div class="text-left mt-10">
+				<p class="text-lg">Discover</p>
 			</div>
+			{#each words as word}
+				<div class="mt-4 bg-blue-200 rounded  p-4">
+					<div class="card text-left w-full bg-primary text-primary-content pt-10">
+						<div class="card-body">
+							<h2 class="card-title">{word.word}</h2>
+							<p>{word.definition}</p>
+							<div class="mt-4">
+								<a
+									style="text-decoration: none;"
+									href="/store/c/mugs"
+									class="text-white mt-4  bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+									>Get the {word.word} Tshirt </a
+								>
+							</div>
+						</div>
+					</div>
+				</div>{/each}
 		</form>
 	</span>
 </section>
