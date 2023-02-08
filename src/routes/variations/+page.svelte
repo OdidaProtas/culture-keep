@@ -8,7 +8,7 @@
 </script>
 
 <div class="">
-	<h1>LUO Dialects</h1>
+	<h1>DHOLUO Dialects</h1>
 	<div class=" px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
 		<button
 			on:click={toggleForm}

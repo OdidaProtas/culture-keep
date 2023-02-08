@@ -13,7 +13,7 @@
 			<div class="mx-auto max-w-2xl py-9 sm:py-48 lg:py-9">
 				<div class="text-center">
 					<p class=" text-gray-900 sm:text-4xl">
-						Get any Luo Dictionary word as a mug, t-shirt or sweatshirt
+						Get any DHOLUO Dictionary word as a mug, t-shirt or sweatshirt
 					</p>
 					<div />
 				</div>
