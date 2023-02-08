@@ -86,7 +86,7 @@
 		</div>
 		<div class="mb-6">
 			<label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-500"
-				>Definition (Luo)</label
+				>Definition (English)</label
 			>
 			<textarea
 				id="definition"
