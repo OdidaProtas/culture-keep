@@ -75,12 +75,18 @@
 			<div class="mt-4 bg-blue-200 rounded  p-4">
 				<div class="card text-left w-full bg-primary text-primary-content pt-10">
 					<div class="card-body">
-						<h2 class="card-title  text-lg ">{word.word}</h2>
-						<p class="mt-3">{word.definition}</p>
+						<h2 class="card-title  text-lg ">{word.word} - ({word.dialect})</h2>
+						<p class="my-3">{word.definition}</p>
+						<h2 class="text-lg my-2">Example</h2>
+						<p>{word.example}</p>
+						<h2 class="text-lg my-2">Translations</h2>
+						<p>English: {word.english}</p>
+						<p>Swahili: {word.swahili}</p>
+
 						<div class="mt-4">
 							<a
 								style="text-decoration: none;"
-								href="/store"
+								href="{`/store?q=${word.word}`}"
 								class="text-white mt-4  bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
 								>Get merchandise with "{word.word}"
 							</a>

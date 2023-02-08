@@ -1,7 +1,5 @@
 <script>
-	/** @type {import('./$types').PageData} */
-	export let data;
-	console.log(data)
+	import { page } from '$app/stores';
 </script>
 
 <svelte:head>
