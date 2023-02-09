@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
@@ -59,3 +60,15 @@ export const actions = {
 
 	}
 };
+
+
+export async function load({ url }) {
+	let definition = await prisma.definition.findFirst({
+		where: {
+			word: url.searchParams.get("q") ?? ""
+		}
+	})
+
+
+	return { definition }
+}

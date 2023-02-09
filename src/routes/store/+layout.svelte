@@ -8,7 +8,7 @@
 	<title>Store</title>
 </svelte:head>
 
-{#if q && !isDetail}
+{#if !isDetail}
 	<div>
 		<div class="relative px-3">
 			<div class="mx-auto max-w-2xl py-9 sm:py-48 lg:py-9">
@@ -27,7 +27,6 @@
 	<div class="bg-white">
 		<main>
 			<div class="relative px-3">
-				
 				<div
 					class="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
 				>

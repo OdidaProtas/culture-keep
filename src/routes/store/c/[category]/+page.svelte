@@ -24,6 +24,9 @@
 	import { page } from '$app/stores';
 	import { diId } from '../../../id';
 	import { onMount } from 'svelte';
+	import Hoodie from './Hoodie.svelte';
+	import Tshirt from './Tshirt.svelte';
+	import Mug from './Mug.svelte';
 	const isMug = $page.url.pathname.includes('/mugs');
 	const isTshirts = $page.url.pathname.includes('/tshirts');
 	const isHoodies = $page.url.pathname.includes('/hoodies');
@@ -61,32 +64,26 @@
 		hoodies: 1200,
 		mugs: 600
 	};
+
+	export let data = { definition: { word: q, definition: '' } };
+	let frontWord = data.definition?.word ?? 'Custom Text';
+	let definition = data.definition?.definition;
 </script>
 
-<div class="flex justify-start lg:inline">
+<div class="flex justify-start lg:inline md:flex-col">
 	<div class="bg-white flex-1 p-2">
 		<div class="group relative">
-			<div class="min-h-80 w-full  rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none ">
+			<div
+				class="min-h-80 w-full  rounded-md flex justify-center group-hover:opacity-75 lg:aspect-none "
+			>
 				{#if isTshirts}
-					<img
-						src={stock.tshirts[variation]}
-						alt="Front of men&#039;s Basic Tee in black."
-						class="h-full w-full object-cover object-center lg:h-full lg:w-full"
-					/>
+					<Tshirt {frontWord} {stock} {variation} />
 				{/if}
 				{#if isMug}
-					<img
-						src={stock.mugs[variation]}
-						alt="Front of men&#039;s Basic Tee in black."
-						class="h-full w-full object-cover object-center lg:h-full lg:w-full"
-					/>
+					<Mug {frontWord} {stock} {variation} />
 				{/if}
 				{#if isHoodies}
-					<img
-						src={stock.hoodies[variation]}
-						alt="Front of men&#039;s Basic Tee in black."
-						class="h-full w-full object-cover object-center lg:h-full lg:w-full"
-					/>
+					<Hoodie {frontWord} {stock} {variation} />
 				{/if}
 			</div>
 			<div class="mt-4 flex justify-between">
@@ -119,22 +116,26 @@
 				required
 				id="word"
 				name="word"
+				bind:value={frontWord}
 			/>
 		</div>
-		<div class="my-6">
-			<label
-				for="definition"
-				class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-500"
-				>Definition (Back) - Optional</label
-			>
-			<textarea
-				id="definition"
-				name="definition"
-				rows="4"
-				class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-				placeholder="Type the  definition here"
-			/>
-		</div>
+		{#if isMug}
+			<div class="my-6">
+				<label
+					for="definition"
+					class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-500"
+					>Definition (Back) - Optional</label
+				>
+				<textarea
+					id="definition"
+					name="definition"
+					bind:value={definition}
+					rows="4"
+					class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+					placeholder="Type the  definition here"
+				/>
+			</div>
+		{/if}
 	</div>
 </div>
 <!-- <div class="flex justify-between">
@@ -156,7 +157,7 @@
 		>
 	</form> -->
 	<form class="w-full" method="POST">
-		<input value={q} id="q" name="q" type="hidden" />
+		<input value={frontWord} id="q" name="q" type="hidden" />
 		<input value={$diId} id="device" name="device" type="hidden" />
 		<input
 			id="price"
