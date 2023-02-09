@@ -2,9 +2,23 @@
 	import Header from './Header.svelte';
 	import '../app.css';
 	import './styles.css';
+	import { onMount } from 'svelte';
+	import { diId } from './id';
+
+	onMount(() => {
+		let deviceID = localStorage.getItem('ld-id');
+		if (deviceID) {
+			diId.set(deviceID);
+		} else {
+			let random = Math.round(Math.floor(Math.random() * (Math.random() * 123666)));
+			let date = Date.now();
+			let idDraft = `${random}${date}`;
+			localStorage.setItem('ld-id', idDraft);
+
+			diId.set(idDraft);
+		}
+	});
 </script>
-
-
 
 <div class="app">
 	<Header />
@@ -47,8 +61,8 @@
 
 	main {
 		flex: 1;
-		display: flex;
-		flex-direction: column;
+		/* display: flex; */
+		/* flex-direction: column; */
 		padding: 1rem;
 		width: 100%;
 		max-width: 64rem;

@@ -1,6 +1,9 @@
 <script>
 	// @ts-nocheck
 	import Counter from '../../../Counter.svelte';
+	import { basket } from '../../basket';
+
+	import { goto } from '$app/navigation';
 
 	let variation = 'blue';
 	let stock = {
@@ -19,9 +22,45 @@
 		}
 	};
 	import { page } from '$app/stores';
+	import { diId } from '../../../id';
+	import { onMount } from 'svelte';
 	const isMug = $page.url.pathname.includes('/mugs');
 	const isTshirts = $page.url.pathname.includes('/tshirts');
 	const isHoodies = $page.url.pathname.includes('/hoodies');
+
+	const q = $page.url.searchParams.get('q');
+
+	let count = 1;
+
+	function handleAddCount() {
+		count = count + 1;
+	}
+	function handleReduceCount() {
+		if (count > 1) {
+			count = count - 1;
+		}
+	}
+
+	onMount(() => {
+		diId.set(localStorage.getItem('ld-id'));
+	});
+
+	function handleAddToCart() {
+		let all = [...$basket];
+		let item = all.find((item) => item.word === q);
+		if (!item) basket.set([...$basket, { word: q, count, price: 100 }]);
+		else {
+			let indexOfItem = all.indexOf(item);
+			all[indexOfItem] = { ...item, count: item.count + count };
+			basket.set([...all]);
+		}
+	}
+
+	let defaultPrices = {
+		tshirts: 800,
+		hoodies: 1200,
+		mugs: 600
+	};
 </script>
 
 <div class="flex justify-start lg:inline">
@@ -54,11 +93,18 @@
 				<div>
 					<h3 class="text-sm text-gray-700">
 						<span aria-hidden="true" class="absolute inset-0" />
-						Basic Tee
 					</h3>
 					<p class="mt-1 text-sm text-gray-500">Black</p>
 				</div>
-				<p class="text-sm font-medium text-gray-900">$35</p>
+				<p class="text-sm font-medium text-gray-900">
+					KES {#if isMug}
+						{defaultPrices.mugs}
+					{:else if isHoodies}
+						{defaultPrices.hoodies}
+					{:else}
+						{defaultPrices.tshirts}
+					{/if}
+				</p>
 			</div>
 		</div>
 	</div>
@@ -79,7 +125,7 @@
 			<label
 				for="definition"
 				class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-500"
-				>Definition (Back)</label
+				>Definition (Back) - Optional</label
 			>
 			<textarea
 				id="definition"
@@ -101,17 +147,33 @@
 	{/each}
 </div> -->
 
-<Counter />
+<Counter {count} {handleReduceCount} {handleAddCount} />
 <div class="mt-6 flex justify-between">
-	<form action="/store/checkout">
+	<!-- <form action="/store/checkout">
 		<button
 			class="btn text-white w-full  bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
 			>Buy now</button
 		>
-	</form>
+	</form> -->
+	<form class="w-full" method="POST">
+		<input value={q} id="q" name="q" type="hidden" />
+		<input value={$diId} id="device" name="device" type="hidden" />
+		<input
+			id="price"
+			value={isMug
+				? defaultPrices.mugs * count
+				: isHoodies
+				? defaultPrices.hoodies * count
+				: defaultPrices.tshirts * count}
+			name="price"
+			type="hidden"
+		/>
+		<input id="quantity" value={count} name="quantity" type="hidden" />
 
-	<button
-		class="btn ml-2 w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-		>Add to basket</button
-	>
+		<button
+			on:click={handleAddToCart}
+			class="btn ml-2 w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+			>Add to basket</button
+		>
+	</form>
 </div>

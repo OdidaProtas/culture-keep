@@ -3,44 +3,48 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
+// datasource db {
+//     provider = "sqlite"
+//     url      = env("DATABASE_URL")
+// }
+
 generator client {
     provider = "prisma-client-js"
 }
 
 model Definition {
-    id         String      @id() @default(cuid())
-    word       String      @unique
+    id         String  @id() @default(cuid())
+    word       String  @unique
     definition String?
     english    String?
     swahili    String?
-    type       String?     @default("word")
-    dialect    String      @default("all")
+    type       String? @default("word")
+    dialect    String  @default("all")
     example    String?
-    OrderItem  OrderItem[]
 }
 
 model Order {
     id           String      @id() @default(cuid())
-    firstName    String
-    lastName     String
-    contactPhone String
-    status       String      @default("pending")
-    city         String
-    town         String
-    location     String
+    device       String?
+    contactPhone String?
+    status       String?     @default("pending")
+    city         String?
+    town         String?
+    location     String?
     totalAmount  String?
+    fullfiled    Boolean?    @default(false)
     items        OrderItem[]
 }
 
 model OrderItem {
-    id           String     @id() @default(cuid())
-    type         String
-    word         Definition @relation(fields: [definitionId], references: [id])
-    definitionId String
-    color        String
-    back         String
-    size         String
-    price        Int
-    Order        Order?     @relation(fields: [orderId], references: [id])
-    orderId      String?
+    id       String  @id() @default(cuid())
+    type     String
+    word     String?
+    color    String?
+    back     String?
+    size     String?
+    price    Int?
+    Order    Order?  @relation(fields: [orderId], references: [id])
+    orderId  String?
+    quantity Int?    @default(1)
 }

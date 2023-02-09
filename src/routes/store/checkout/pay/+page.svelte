@@ -65,7 +65,7 @@
 							</div>
 
 							<div class="mt-8">
-								<div class="flex flex-col items-center p-6 bg-white shadow-md">
+								<div class="flex flex-col items-center p-6 ">
 									<h3 class="text-lg font-medium mb-4">Pay with MPesa</h3>
 									<form>
 										<div class="mb-4">
@@ -85,11 +85,6 @@
 						</div>
 
 						<div class="border-t border-gray-200 py-6 px-4 sm:px-6">
-							<div class="flex justify-between text-base font-medium text-gray-900">
-								<p>Subtotal</p>
-								<p>KES 0.00</p>
-							</div>
-							<p class="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
 							<div class="mt-6">
 								<a
 									href="/store/checkout/pay/status"

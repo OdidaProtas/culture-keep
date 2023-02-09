@@ -1,8 +1,13 @@
 <script>
+	import { onMount } from 'svelte';
+	import { diId } from './id';
+
 	export let data = {};
 
 	// @ts-ignore
 	const { words = [] } = data;
+
+
 </script>
 
 <svelte:head>
@@ -11,7 +16,7 @@
 </svelte:head>
 
 <section>
-	<span class="welcome text-center ">
+	<span class=" text-center ">
 		<!-- <source srcset={welcome} type="image/webp" /> -->
 
 		<h1
@@ -65,8 +70,12 @@
 	</span>
 </section>
 
+<div class="p-4 text-center">
+	<a href="/define">Define words</a>
+</div>
+
 <div>
-	<div class="text-left mt-10">
+	<div class="text-left mt-10 ">
 		<p class="text-lg">Discover</p>
 	</div>
 
@@ -86,7 +95,7 @@
 						<div class="mt-4">
 							<a
 								style="text-decoration: none;"
-								href="{`/store?q=${word.word}`}"
+								href={`/store?q=${word.word}`}
 								class="text-white mt-4  bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
 								>Get merchandise with "{word.word}"
 							</a>
@@ -100,22 +109,10 @@
 
 <style>
 	section {
-		display: flex;
-		flex-direction: column;
 		justify-content: center;
-		align-items: center;
-		flex: 0.6;
 	}
 
 	h1 {
 		width: 100%;
-	}
-
-	.welcome {
-		display: block;
-		position: relative;
-		width: 100%;
-		height: 0;
-		padding: 0 0 calc(100% * 495 / 2048) 0;
 	}
 </style>

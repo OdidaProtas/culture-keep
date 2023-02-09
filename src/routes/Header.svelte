@@ -1,11 +1,13 @@
 <script>
 	import { page } from '$app/stores';
+	import { basket } from '../routes/store/basket';
+	import { diId } from '../routes/id';
 </script>
 
 <header>
 	<div class="corner">
 		<a href="https://kit.svelte.dev">
-			<!-- <img src={logo} alt="SvelteKit" /> -->
+			<img src={''} alt="Dict" />
 		</a>
 	</div>
 
@@ -20,9 +22,9 @@
 			<li aria-current={$page.url.pathname === '/about' ? 'page' : undefined}>
 				<a href="/about">About</a>
 			</li>
-			<li aria-current={$page.url.pathname.startsWith('/define') ? 'page' : undefined}>
+			<!-- <li aria-current={$page.url.pathname.startsWith('/define') ? 'page' : undefined}>
 				<a href="/define">Define</a>
-			</li>
+			</li> -->
 			<!-- <li aria-current={$page.url.pathname.startsWith('/blog') ? 'page' : undefined}>
 				<a href="/blog">Blog</a>
 			</li> -->
@@ -35,11 +37,12 @@
 		</svg>
 	</nav>
 
-	<div class="corner pr-2">
-		<a href="/store/basket">
-			<!-- svelte-ignore a11y-missing-attribute -->
-			<img src="https://img.icons8.com/color/30/null/shopping-cart--v1.png" />
-		</a>
+	<div>
+		<div class="corner pr-2">
+			<a href={`/store/basket?basket-id=${$diId}`}>
+				<img alt="Cart" src="https://img.icons8.com/color/30/null/shopping-cart--v1.png" />
+			</a>
+		</div>
 	</div>
 </header>
 

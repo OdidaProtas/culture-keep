@@ -1,7 +1,18 @@
 <script>
+	// @ts-nocheck
+
 	function closeCart() {
 		history.back();
 	}
+
+	export let data = { order: {} };
+
+	let contactPhone;
+	let city;
+	let town;
+	let location;
+
+	console.log(data);
 </script>
 
 <div class="relative z-10" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
@@ -65,38 +76,8 @@
 							</div>
 
 							<div class="mt-8">
-								<form class="w-full max-w-lg">
-									<div class="flex flex-wrap -mx-3 mb-6">
-										<div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-											<label
-												class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-												for="grid-first-name"
-											>
-												First Name
-											</label>
-											<input
-												class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-												id="grid-first-name"
-												type="text"
-												placeholder="Jane"
-											/>
-											<p class="text-red-500 text-xs italic">Please fill out this field.</p>
-										</div>
-										<div class="w-full md:w-1/2 px-3">
-											<label
-												class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-												for="grid-last-name"
-											>
-												Last Name
-											</label>
-											<input
-												class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-												id="grid-last-name"
-												type="text"
-												placeholder="Doe"
-											/>
-										</div>
-									</div>
+								<form method="POST" class="w-full max-w-lg">
+									<div class="flex flex-wrap -mx-3 mb-6" />
 									<div class="flex flex-wrap -mx-3 mb-6">
 										<div class="w-full px-3">
 											<label
@@ -106,8 +87,10 @@
 												Contact phone
 											</label>
 											<input
+												bind:value={data.order.contactPhone}
+												id="contactPhone"
+												name="contactPhone"
 												class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-												id="grid-password"
 											/>
 										</div>
 									</div>
@@ -117,12 +100,14 @@
 												class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
 												for="grid-city"
 											>
-												City / Town
+												City
 											</label>
 											<input
 												class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-												id="grid-city"
+												name="city"
+												id="city"
 												type="text"
+												bind:value={data.order.city}
 												placeholder="Nairobi"
 											/>
 										</div>
@@ -135,8 +120,10 @@
 											</label>
 											<input
 												class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-												id="grid-city"
+												id="town"
+												name="town"
 												type="text"
+												bind:value={data.order.town}
 												placeholder="CBD"
 											/>
 										</div>
@@ -148,22 +135,24 @@
 												Location
 											</label>
 											<input
+												id="location"
+												name="location"
+												bind:value={data.order.location}
 												class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-												id="grid-zip"
 												type="text"
 											/>
 										</div>
 									</div>
+									<button
+										type="submit"
+										class="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+										>Update address</button
+									>
 								</form>
 							</div>
 						</div>
 
 						<div class="border-t border-gray-200 py-6 px-4 sm:px-6">
-							<div class="flex justify-between text-base font-medium text-gray-900">
-								<p>Subtotal</p>
-								<p>KES 0.00</p>
-							</div>
-							<p class="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
 							<div class="mt-6">
 								<a
 									href="/store/checkout/pay"

@@ -1,4 +1,7 @@
 <script>
+	import { diId } from "../../id";
+
+
 	let products = [
 		{
 			image: '',

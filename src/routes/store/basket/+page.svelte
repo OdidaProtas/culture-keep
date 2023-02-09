@@ -1,12 +1,20 @@
 <script>
-    function closeCart(){
-        history.back()
-    }
+	// @ts-nocheck
+
+	import { diId } from '../../id';
+
+	function closeCart() {
+		history.back();
+	}
+	export let data = { order: { items: [] } };
+
+	const orderItems = data.order?.items;
+	const totalAmount = orderItems.reduce((prev, curr) => {
+		return prev + curr.price;
+	}, 0);
 </script>
 
-
 <div class="relative z-10" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
-
 	<!--
       Background backdrop, show/hide based on slide-over state.
   
@@ -40,7 +48,11 @@
 									Shopping cart
 								</h2>
 								<div class="ml-3 flex h-7 items-center">
-									<button on:click={closeCart} type="button" class="-m-2 p-2 text-gray-400 hover:text-gray-500">
+									<button
+										on:click={closeCart}
+										type="button"
+										class="-m-2 p-2 text-gray-400 hover:text-gray-500"
+									>
 										<span class="sr-only">Close panel</span>
 										<!-- Heroicon name: outline/x-mark -->
 										<svg
@@ -64,78 +76,48 @@
 
 							<div class="mt-8">
 								<div class="flow-root">
+									{#if !orderItems.length}
+										<div>
+											<p>Your shopping basket is currently empty</p>
+										</div>
+									{/if}
 									<ul class="-my-6 divide-y divide-gray-200">
-										<!-- <li class="flex py-6">
-											<div
-												class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200"
-											>
-												<img
-													src="https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg"
-													alt="Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt."
-													class="h-full w-full object-cover object-center"
-												/>
-											</div>
-
-											<div class="ml-4 flex flex-1 flex-col">
-												<div>
-													<div class="flex justify-between text-base font-medium text-gray-900">
-														<h3>
-															<a href="#">Throwback Hip Bag</a>
-														</h3>
-														<p class="ml-4">$90.00</p>
-													</div>
-													<p class="mt-1 text-sm text-gray-500">Salmon</p>
+										{#each orderItems as item, index}
+											<li class="flex py-6">
+												<div
+													class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200"
+												>
+													<img
+														src="https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg"
+														alt="Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt."
+														class="h-full w-full object-cover object-center"
+													/>
 												</div>
-												<div class="flex flex-1 items-end justify-between text-sm">
-													<p class="text-gray-500">Qty 1</p>
 
-													<div class="flex">
-														<button
-															type="button"
-															class="font-medium text-indigo-600 hover:text-indigo-500"
-															>Remove</button
-														>
+												<div class="ml-4 flex flex-1 flex-col">
+													<div>
+														<div class="flex justify-between text-base font-medium text-gray-900">
+															<h3>
+																<a href="/">{item.word} lkl</a>
+															</h3>
+															<p class="ml-4">KES {item.price}</p>
+														</div>
+														<!-- <p class="mt-1 text-sm text-gray-500">Salmon</p> -->
 													</div>
-												</div>
-											</div>
-										</li> -->
+													<div class="flex flex-1 items-end justify-between text-sm">
+														<p class="text-gray-500">Qty {item.quantity}</p>
 
-										<!-- <li class="flex py-6">
-											<div
-												class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200"
-											>
-												<img
-													src="https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg"
-													alt="Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch."
-													class="h-full w-full object-cover object-center"
-												/>
-											</div>
-
-											<div class="ml-4 flex flex-1 flex-col">
-												<div>
-													<div class="flex justify-between text-base font-medium text-gray-900">
-														<h3>
-															<a href="/">Medium Stuff Satchel</a>
-														</h3>
-														<p class="ml-4">$32.00</p>
-													</div>
-													<p class="mt-1 text-sm text-gray-500">Blue</p>
-												</div>
-												<div class="flex flex-1 items-end justify-between text-sm">
-													<p class="text-gray-500">Qty 1</p>
-
-													<div class="flex">
-														<button
-															type="button"
-															class="font-medium text-indigo-600 hover:text-indigo-500"
-															>Remove</button
-														>
+														<div class="flex">
+															<button
+																type="button"
+																class="font-medium text-indigo-600 hover:text-indigo-500"
+																>Remove</button
+															>
+														</div>
 													</div>
 												</div>
-											</div>
-										</li> -->
-
-										<!-- More products... -->
+											</li>
+										{/each}
 									</ul>
 								</div>
 							</div>
@@ -144,15 +126,22 @@
 						<div class="border-t border-gray-200 py-6 px-4 sm:px-6">
 							<div class="flex justify-between text-base font-medium text-gray-900">
 								<p>Subtotal</p>
-								<p>KES 0.00</p>
+								<p>KES {totalAmount}</p>
 							</div>
-							<p class="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
+							<p class="mt-0.5 text-sm text-gray-500">With Shipping and taxes.</p>
 							<div class="mt-6">
-								<a
-									href="/store/checkout"
-									class="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
-									>Checkout</a
-								>
+								{#if orderItems.length > 0}
+									<a
+										href={`/store/checkout?basket-id=${$diId}`}
+										class="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+										>Checkout</a
+									>
+								{:else}
+									<span
+										class="flex items-center justify-center rounded-md border border-transparent bg-gray-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-gray-700"
+										>Checkout</span
+									>
+								{/if}
 							</div>
 						</div>
 					</div>
