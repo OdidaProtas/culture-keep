@@ -8,7 +8,7 @@
 
 <div>
 	<div class="text-center">
-		<h1>Our stories</h1>
+		<h1>Blog management console</h1>
 	</div>
 	<hr />
 	{#if !hasPosts}

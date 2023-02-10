@@ -2,13 +2,12 @@
 	import { page } from '$app/stores';
 	import { basket } from '../routes/store/basket';
 	import { diId } from '../routes/id';
+	import Menu from './Menu.svelte';
 </script>
 
 <header>
 	<div class="corner">
-		<!-- <a href="https://kit.svelte.dev">
-			<img src={''} alt="Dict" />
-		</a> -->
+		<Menu/>
 	</div>
 
 	<nav>
@@ -25,9 +24,9 @@
 			<!-- <li aria-current={$page.url.pathname.startsWith('/define') ? 'page' : undefined}>
 				<a href="/define">Define</a>
 			</li> -->
-			<!-- <li aria-current={$page.url.pathname.startsWith('/blog') ? 'page' : undefined}>
+			<li aria-current={$page.url.pathname.startsWith('/blog') ? 'page' : undefined}>
 				<a href="/blog">Blog</a>
-			</li> -->
+			</li>
 			<li aria-current={$page.url.pathname.startsWith('/store') ? 'page' : undefined}>
 				<a href="/store">Store</a>
 			</li>

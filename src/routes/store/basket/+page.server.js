@@ -1,6 +1,6 @@
-import { PrismaClient } from '@prisma/client';
+// @ts-nocheck
+import prisma from '../../../db/prisma';
 
-const prisma = new PrismaClient();
 // @ts-ignore
 export const load = async ({ url }) => {
 
@@ -13,4 +13,21 @@ export const load = async ({ url }) => {
         }
     });
     return { order };
+};
+
+
+/** @type {import('./$types').Actions} */
+export const actions = {
+    default: async ({ cookies, request, url }) => {
+        const data = await request.formData();
+        let basketId = url.searchParams.get("basket-id")
+
+        const id = String(data.get("id"))
+
+        await prisma.orderItem.delete({
+            where: { id }
+        })
+
+
+    }
 };

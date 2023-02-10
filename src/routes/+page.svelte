@@ -6,8 +6,6 @@
 
 	// @ts-ignore
 	const { words = [] } = data;
-
-
 </script>
 
 <svelte:head>
@@ -20,7 +18,7 @@
 		<!-- <source srcset={welcome} type="image/webp" /> -->
 
 		<h1
-			class="mb-2 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-gray-700"
+			class="mb-2 mt-9 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-gray-700"
 		>
 			DHOLUO Dictionary
 		</h1>
@@ -70,8 +68,10 @@
 	</span>
 </section>
 
-<div class="p-4 text-center">
-	<a href="/define">Define words</a>
+<div class="p-4 text-center text-lg">
+	<a href="/define">Define missing words</a>
+	<p />
+	<a href="/learn">Learn DHOLUO</a>
 </div>
 
 <div>
@@ -81,8 +81,8 @@
 
 	<div class="grid sm:grid-cols-1 lg:grid-cols-2 md:grid-cols-2 gap-4">
 		{#each words as word}
-			<div class="mt-4 bg-blue-200 rounded  p-4">
-				<div class="card text-left w-full bg-primary text-primary-content pt-10">
+			<div class="mt-2 bg-blue-200 rounded  p-4 pt-0">
+				<div class="card text-left w-full bg-primary text-primary-content pt-3">
 					<div class="card-body">
 						<h2 class="card-title  text-lg ">{word.word} - ({word.dialect})</h2>
 						<p class="my-3">{word.definition}</p>
@@ -97,7 +97,7 @@
 								style="text-decoration: none;"
 								href={`/store?q=${word.word}`}
 								class="text-white mt-4  bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-								>Get merchandise with "{word.word}"
+								>Buy "{word.word}" Swag
 							</a>
 						</div>
 					</div>

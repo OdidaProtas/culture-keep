@@ -27,11 +27,11 @@
 	{/if}
 	<h1>Define a word</h1>
 	<p class="mb-6">
-		All words in <a href="/">LUO Dictionary</a> were written by people just like you. Now's your chance
+		All words in <a target="blank" href="/">DHOLUO Dictionary</a> were written by people just like you. Now's your chance
 		to add your own!
 	</p>
 	<p>
-		Please review <a href="/guidelines">LUO Dictionary content guidelines</a> before writing your definition.
+		Please review <a href="/guidelines">DHOLUO Dictionary content guidelines</a> before writing your definition.
 		Here's the short version: Share definitions that other people will find meaningful and never post
 		hate speech or people’s personal information.
 	</p>

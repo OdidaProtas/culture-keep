@@ -108,11 +108,14 @@
 														<p class="text-gray-500">Qty {item.quantity}</p>
 
 														<div class="flex">
-															<button
-																type="button"
-																class="font-medium text-indigo-600 hover:text-indigo-500"
-																>Remove</button
-															>
+															<form method="POST">
+																<input id="id" name="id" value={item.id} type="hidden" />
+																<button
+																	type="submit"
+																	class="font-medium text-indigo-600 hover:text-indigo-500"
+																	>Remove</button
+																>
+															</form>
 														</div>
 													</div>
 												</div>

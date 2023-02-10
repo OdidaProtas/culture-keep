@@ -40,7 +40,9 @@
 	{/if}
 	{#if !data.word}
 		<h1>Missing word</h1>
-		<p>The word hasn't been defined in the dictionary.</p>
+		<div class="text-center">
+			<p>The word hasn't been defined in the dictionary.</p>
+		</div>
 		<div class="text-center mt-6">
 			<a href="/define">Define this word</a>
 		</div>

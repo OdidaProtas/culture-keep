@@ -1,6 +1,5 @@
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
+// @ts-nocheck
+import prisma from '../../../db/prisma';
 
 /** @type {import('./$types').Actions} */
 export const actions = {
@@ -38,7 +37,6 @@ export const actions = {
     }
 };
 
-// @ts-ignore
 export async function load({ url }) {
     let basketId = url.searchParams.get("basket-id")
     const order = await prisma.order.findFirst({

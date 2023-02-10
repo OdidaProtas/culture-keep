@@ -1,14 +1,14 @@
 <script>
 	// @ts-nocheck
 
-	export let data = { posts: [] };
+	export let data = { drafts: [] };
 
-	const hasPosts = Boolean(data.posts.length);
+	const hasPosts = Boolean(data.drafts.length);
 </script>
 
 <div>
 	<div class="text-center">
-		<h1>Our stories</h1>
+		<h1>My drafts</h1>
 	</div>
 	<hr />
 	{#if !hasPosts}
@@ -25,7 +25,7 @@
 	{/if}
 
 	<div class="grid sm:grid-cols-1 mt-9 lg:grid-cols-2 md:grid-cols-2 gap-4">
-		{#each data.posts as post}
+		{#each data.drafts as post}
 			<a class="text-black  " style="text-decoration:none" href={`/blog/${post.id}`}>
 				<div class="bg-blue-200 p-3 rounded-lg cursor-pointer">
 					<img src="/" alt="Post cover imahe">

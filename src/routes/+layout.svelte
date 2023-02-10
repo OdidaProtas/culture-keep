@@ -31,23 +31,25 @@
 		<footer
 			class="p-4 bg-white  shadow md:flex md:items-center md:justify-between md:p-6 dark:bg-gray-800"
 		>
-			<span class="text-sm text-gray-500 sm:text-center dark:text-gray-400"
-				>© 2023 <a href="/" class="hover:underline">Luo Dictionary</a>
-			</span>
-			<ul class="flex flex-wrap items-center mt-3 text-sm text-gray-500 dark:text-gray-400 sm:mt-0">
-				<li>
+			
+			<ul class="flex flex-wrap items-center mt-6 text-sm text-gray-500 dark:text-gray-400 sm:mt-0">
+				<!-- <li>
 					<a href="/about" class="mr-4 hover:underline md:mr-6 ">About</a>
 				</li>
 				<li>
 					<a href="/" class="mr-4 hover:underline md:mr-6">Privacy Policy</a>
 				</li>
+				 -->
 				<li>
-					<a href="/" class="mr-4 hover:underline md:mr-6">Licensing</a>
+					<a href="/contact-us" class="hover:underline">Contact us</a>
 				</li>
 				<li>
-					<a href="/" class="hover:underline">Contact</a>
+					<a href="/support-us" class="ml-4 hover:underline md:mr-6">Support us</a>
 				</li>
 			</ul>
+			<span class="text-sm text-gray-500 sm:text-center dark:text-gray-400 mt-2"
+				>Made with ❤ by <a target="blank" href="https://linkedin.com/in/brian-odida" class="hover:underline">Protas Okoth Odida</a> & <a target="blank" href="https://twitter.com/">DHOLUO Dictionary</a>
+			</span>
 		</footer>
 	</div>
 </div>

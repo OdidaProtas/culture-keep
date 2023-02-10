@@ -1,8 +1,9 @@
-import { PrismaClient } from '@prisma/client';
+// @ts-ignore
+import prisma from "../db/prisma";
 
-const prisma = new PrismaClient();
 export const load = async () => {
 
+	// @ts-ignore
 	const words = await prisma.definition.findMany({ take: 5 });
 
 	return { words };

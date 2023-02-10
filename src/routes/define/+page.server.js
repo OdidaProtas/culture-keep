@@ -1,6 +1,5 @@
-import { PrismaClient } from '@prisma/client';
-
-const prisma = new PrismaClient();
+// @ts-nocheck
+import prisma from '../../db/prisma';
 
 /** @type {import('./$types').Actions} */
 export const actions = {
