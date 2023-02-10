@@ -13,21 +13,46 @@
 
 	const user = $page.data.session?.user;
 
-	import { quill } from 'svelte-quill';
+	import { onMount } from 'svelte';
 
-	const options = {
-		modules: {
-			toolbar: [
-				[{ header: [1, 2, 3, 4, 5, 6] }],
-				['bold', 'italic', 'underline', 'strike'],
-				['link', 'image', 'link']
-			]
-		},
-		placeholder: 'Write your story...',
-		theme: 'bubble'
-	};
+	let editor;
+
+	export let toolbarOptions = [
+		[
+			{ header: 1 },
+			{ header: 2 },
+			{ header: 3 },
+			{ header: 4 },
+			{ header: 5 },
+			{ header: 6 },
+			'blockquote',
+			'link',
+			'image',
+			'video'
+		],
+		['bold', 'italic', 'underline', 'strike'],
+		[{ list: 'ordered' }, { list: 'ordered' }],
+		[{ align: [] }],
+		['clean']
+	];
 
 	let content;
+
+	onMount(async () => {
+		const { default: Quill } = await import('quill');
+
+		let quill = new Quill(editor, {
+			modules: {
+				toolbar: toolbarOptions
+			},
+			theme: 'bubble',
+			placeholder: 'Write your story...'
+		});
+
+		quill.on('text-change', function (delta, oldDelta, source) {
+			content = quill.root.innerHTML;
+		});
+	});
 </script>
 
 <svelte:head>
@@ -95,13 +120,15 @@
 					rows="18"
 					placeholder="Write your post here. Markdown is supported"
 				/>
-				<div
-					class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-					use:quill={options}
-					on:text-change={(e) => {
-						content = e.detail.html;
-					}}
-				/>
+				<div class="editor-wrapper">
+					<div
+						class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+						bind:this={editor}
+						on:text={(e) => {
+							console.log(e);
+						}}
+					/>
+				</div>
 			</div>
 
 			<button

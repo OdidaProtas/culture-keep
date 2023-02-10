@@ -323,6 +323,11 @@
     svelte-hmr "^0.15.1"
     vitefu "^0.2.3"
 
+"@tadashi/svelte-editor-quill@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@tadashi/svelte-editor-quill/-/svelte-editor-quill-2.1.0.tgz#e29759095a3b1ff480ea28a1dae8ba6663af0d7c"
+  integrity sha512-8p4X8L4MZVlEHO9mC7ZStPw/fSHhglASAHQAcMfK/oBbe+kwpwSa6VKkrdCuRHCcjiie19md5Ux8FWgy9+nfAw==
+
 "@tootallnate/once@2":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@tootallnate/once/-/once-2.0.0.tgz#f544a148d3ab35801c1f633a7441fd87c2e484bf"
