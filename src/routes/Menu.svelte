@@ -8,6 +8,8 @@
 	const user = $page.data.session?.user;
 	import { signIn, signOut } from '@auth/sveltekit/client';
 	import { isAdmin } from '../db/authbodge';
+
+	export const csr = true;
 </script>
 
 <div class="m-2">
