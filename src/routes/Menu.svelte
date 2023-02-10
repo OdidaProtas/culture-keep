@@ -19,7 +19,7 @@
 		</button>
 		<p on:click={toggle}>menu</p>
 	{/if} -->
-	{#if !menuOpen}
+	<!-- {#if !menuOpen}
 		<button on:click={toggle}>
 			<svg xmlns="http://www.w3.org/2000/svg" height="48" width="48"
 				><path
@@ -27,10 +27,10 @@
 				/></svg
 			>
 		</button>
-	{/if}
+	{/if} -->
 </div>
 
-{#if menuOpen}
+{#if true}
 	<div class="absolute z-50 top-18 left-2">
 		<div
 			class="w-48 text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
