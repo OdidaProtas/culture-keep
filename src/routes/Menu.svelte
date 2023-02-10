@@ -11,16 +11,15 @@
 </script>
 
 <div class="m-2">
-	{#if !menuOpen}
+	<!-- {#if menuOpen}
 		<button on:click={toggle}>
 			<svg xmlns="http://www.w3.org/2000/svg" height="48" width="48"
 				><path d="M6 36v-3h36v3Zm0-10.5v-3h36v3ZM6 15v-3h36v3Z" /></svg
 			>
 		</button>
-		<!-- svelte-ignore a11y-click-events-have-key-events -->
 		<p on:click={toggle}>menu</p>
-	{/if}
-	{#if menuOpen}
+	{/if} -->
+	{#if !menuOpen}
 		<button on:click={toggle}>
 			<svg xmlns="http://www.w3.org/2000/svg" height="48" width="48"
 				><path
