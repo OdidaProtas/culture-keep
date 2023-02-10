@@ -12,20 +12,20 @@
 		post: { title: '' }
 	};
 
-	import { quill } from 'svelte-quill';
+	// import { quill } from 'svelte-quill';
 
-	const options = {
-		modules: {
-			toolbar: [
-				[{ header: [1, 2, 3, 4, 5, 6] }],
-				['bold', 'italic', 'underline', 'strike'],
-				['link', 'image', 'link']
-			]
-		},
-		placeholder: 'Write your story...',
-		theme: 'bubble'
-	};
-	let content = data.post.content;
+	// const options = {
+	// 	modules: {
+	// 		toolbar: [
+	// 			[{ header: [1, 2, 3, 4, 5, 6] }],
+	// 			['bold', 'italic', 'underline', 'strike'],
+	// 			['link', 'image', 'link']
+	// 		]
+	// 	},
+	// 	placeholder: 'Write your story...',
+	// 	theme: 'bubble'
+	// };
+	// let content = data.post.content;
 </script>
 
 <svelte:head>
@@ -70,20 +70,18 @@
 				>Blog content
 			</label>
 			<input
-				type="hidden"
 				id="content"
 				name="content"
-				value={content}
 				rows="18"
 				placeholder="Write your post here. Markdown is supported"
 			/>
-			<div
+			<!-- <div
 				class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 				use:quill={options}
 				on:text-change={(e) => {
 					content = e.detail.html;
 				}}
-			/>
+			/> -->
 		</div>
 
 		<button
