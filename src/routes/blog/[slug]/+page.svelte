@@ -2,15 +2,14 @@
 	// @ts-nocheck
 
 	export let data = { post: { title: '' } };
+	console.log(data.post.content);
 </script>
 
 {#if !data.post}
-	<div
-		class="flex align-middle justify-center h-full text-lg text-center mt-20"
-	>
+	<div class="flex align-middle justify-center h-full text-lg text-center mt-20">
 		<div>
 			<p>Post not found. There could be a url mismatch, or it may have been deleted.</p>
-			<a  class="mt-4"  href="/blog/new">Add a new post</a>
+			<a class="mt-4" href="/blog/new">Add a new post</a>
 		</div>
 	</div>
 {/if}
@@ -30,7 +29,7 @@
 		</div>
 
 		<div class="my-9">
-			{data.post.content}
+			{@html data.post.content}
 		</div>
 
 		<div class="flex justify-between">

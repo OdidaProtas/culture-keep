@@ -8,18 +8,30 @@
 		type: 'word'
 	};
 
-	function handleChange(e) {
-		state = { ...state, [e.target.name]: e.target.value };
-	}
-
 	export let data = {
 		post: { title: '' }
 	};
+
+	import { quill } from 'svelte-quill';
+
+	const options = {
+		modules: {
+			toolbar: [
+				[{ header: [1, 2, 3, 4, 5, 6] }],
+				['bold', 'italic', 'underline', 'strike'],
+				['link', 'image', 'link']
+			]
+		},
+		placeholder: 'Write your story...',
+		theme: 'bubble'
+	};
+	let content = data.post.content;
 </script>
 
 <svelte:head>
-	<title>Define words</title>
+	<title>Edit post</title>
 	<meta name="description" content="About this app" />
+	<link href="//cdn.quilljs.com/1.3.6/quill.bubble.css" rel="stylesheet" />
 </svelte:head>
 
 <div class="">
@@ -53,18 +65,24 @@
 				bind:value={data.post.title}
 			/>
 		</div>
-
 		<div class="mb-6">
 			<label for="content" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-500"
 				>Blog content
 			</label>
-			<textarea
+			<input
+				type="hidden"
 				id="content"
 				name="content"
-                bind:value={data.post.content}
+				value={content}
 				rows="18"
-				class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 				placeholder="Write your post here. Markdown is supported"
+			/>
+			<div
+				class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+				use:quill={options}
+				on:text-change={(e) => {
+					content = e.detail.html;
+				}}
 			/>
 		</div>
 

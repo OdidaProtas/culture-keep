@@ -48,7 +48,7 @@
 				</li>
 			</ul>
 			<span class="text-sm text-gray-500 sm:text-center dark:text-gray-400 mt-2"
-				>Made with ❤ by <a target="blank" href="https://linkedin.com/in/brian-odida" class="hover:underline">Protas Okoth Odida</a> & <a target="blank" href="https://twitter.com/">DHOLUO Dictionary</a>
+				>Made with ❤ by <a target="blank" href="https://linkedin.com/in/brian-odida" class="hover:underline">Protas Okoth Odida</a> & <a target="blank" href="https://twitter.com/Thriving_luos">DHOLUO Dictionary</a>
 			</span>
 		</footer>
 	</div>
