@@ -1,12 +1,12 @@
-// datasource db {
-//     provider = "cockroachdb"
-//     url      = env("DATABASE_URL")
-// }
-
 datasource db {
-    provider = "sqlite"
+    provider = "cockroachdb"
     url      = env("DATABASE_URL")
 }
+
+// datasource db {
+//     provider = "sqlite"
+//     url      = env("DATABASE_URL")
+// }
 
 generator client {
     provider = "prisma-client-js"
@@ -112,8 +112,8 @@ model User {
 }
 
 model VerificationToken {
-    //   id         Int      @id @default(sequence())
-    id         String   @id @default(cuid())
+    id         Int      @id @default(sequence())
+    // id         String   @id @default(cuid())
     identifier String
     token      String   @unique
     expires    DateTime
