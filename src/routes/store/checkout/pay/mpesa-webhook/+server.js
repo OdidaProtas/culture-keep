@@ -7,7 +7,11 @@ export async function POST({ url, request }) {
 
     try {
         let data = await request.formData()
+        console.log("data", data)
+        console.log("...data", ...data)
+        console.log("kjgh", Object.fromEntries(data))
         const body = JSON.parse(String(data.get("Body")))
+        console.log("body", body)
         const stkCallback = body.stkCallback;
         const checkoutId = stkCallback.CheckoutRequestID
         const responseCode = stkCallback.ResultCode

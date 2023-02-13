@@ -45,7 +45,7 @@
 	<div class="bg-red-200 p-2 rounded-lg my-4 text-left">
 		<h4 class="text-lg">Payment Details</h4>
 		<p class="mt-4">An error occured while processing your request</p>
-		<p>Error Details: {payment.customerMessage}</p>
+		<p>Error Details: {payment?.customerMessage}</p>
 	</div>
 {/if}
 
