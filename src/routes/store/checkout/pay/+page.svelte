@@ -5,6 +5,9 @@
 	}
 
 	export let data = { payment: '' };
+	let phone = '';
+
+	import { diId } from '../../../id';
 </script>
 
 <form method="POST">
@@ -35,15 +38,15 @@
 				  To: "translate-x-full"
 			  -->
 					<div class="pointer-events-auto w-screen max-w-md">
-						<div class="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
-							<div class="flex-1 overflow-y-auto py-6 px-4 sm:px-6">
+						<div class="flex h-full  flex-col overflow-y-scroll bg-white shadow-xl">
+							<div class="flex-1 overflow-y-auto pt-6 px-4 sm:px-6">
 								<div class="flex items-start justify-between">
 									<h2 class="text-lg font-medium text-gray-900" id="slide-over-title">
 										Order Payment
 									</h2>
 									<div class="ml-3 flex h-7 items-center">
-										<button
-											on:click={closeCart}
+										<a
+											href="/store/basket"
 											type="button"
 											class="-m-2 p-2 text-gray-400 hover:text-gray-500"
 										>
@@ -64,55 +67,54 @@
 													d="M6 18L18 6M6 6l12 12"
 												/>
 											</svg>
-										</button>
+										</a>
 									</div>
 								</div>
 
-								{#if data.payment.id}
-									<div class="p-2 bg-blue-200 rounded-lg mt-20">
-										<p>Payment request has been made</p>
-										<p class="text-lg mt-3 text-blue-800">
-											Payment Status: {data.payment.status}
-										</p>
-
-										<p class="text-lg text-blue-800">
-											Phone: {data.payment.phone}
-										</p>
-										<small color="text-blue-800"
-											>If you didn't receive a prompt from MPESA, please try again below</small
-										>
-										<div class="mt-4">
-											<a href="/store/orders">Track order</a>
-										</div>
-									</div>
-								{/if}
 								<div class="mt-8 w-full">
 									<div class=" pt-6 ">
 										<h3 class="text-lg font-medium mb-4">Pay with MPesa</h3>
+
+										{#if data.payment?.status === 'error'}
+											<div class="p-2 bg-red-200 rounded-lg mb-3">
+												<p class="text-lg">Request failed</p>
+												<small color="text-blue-800">
+													An error occured while processing your request. Check phone number and try
+													again or contact support for help
+												</small>
+											</div>
+										{/if}
 										<div class="mb-4">
-											<label class="block font-medium mb-2" for="phone-number">
-												Phone Number
-											</label>
 											<input
 												class="w-full border border-gray-400 p-2"
 												id="phone"
 												name="phone"
 												type="tel"
 												required
+												bind:value={phone}
 												placeholder="254712345678"
 											/>
 										</div>
 									</div>
 								</div>
+								<div>
+									{#if data.payment}
+										<div class="p-2 bg-blue-200 rounded-lg">
+											<p class="text-lg">You will receive a prompt to enter your MPESA Pin</p>
+											<small color="text-blue-800">
+												Your order will be confirmed upon successful payment.
+											</small>
+											<div class="mt-4">
+												<a href={`/store/orders?ref=${$diId}`}>Track your order status here</a>
+											</div>
+										</div>
+									{/if}
+								</div>
 							</div>
 
-							<div class="border-t border-gray-200 py-6 px-4 sm:px-6">
+							<div class="border-t  border-gray-200 py-6 px-4 sm:px-6">
 								<div class="mt-6">
-									<button
-										type="submit"
-										class="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
-										>Confirm payment</button
-									>
+									<button class="bg-green-800 text-white rounded-lg p-2">Request payment</button>
 								</div>
 							</div>
 						</div>

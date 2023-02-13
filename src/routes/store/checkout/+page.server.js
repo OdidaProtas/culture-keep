@@ -1,4 +1,5 @@
 // @ts-nocheck
+import { redirect } from '@sveltejs/kit';
 import prisma from '../../../db/prisma';
 
 /** @type {import('./$types').Actions} */
@@ -14,7 +15,8 @@ export const actions = {
         let existingOrder = await prisma.order.findFirst({
             where: {
                 fullfiled: false,
-                device
+                device,
+                status: "draft"
             }
         })
 
@@ -32,7 +34,6 @@ export const actions = {
             })
         }
 
-        console.log(existingOrder)
 
     }
 };
@@ -42,8 +43,11 @@ export async function load({ url }) {
     const order = await prisma.order.findFirst({
         where: {
             device: basketId,
-            fullfiled: false
+            fullfiled: false,
+            status: "draft"
         }
     })
+    if (!order)
+        throw redirect("302", `/store/basket?basket-id=${basketId}`)
     return { order }
 }

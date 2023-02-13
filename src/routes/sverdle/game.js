@@ -1,11 +1,12 @@
 import { words, allowed } from './words.server';
 
 export class Game {
+	
 	/**
 	 * Create a game object from the player's cookie, or initialise a new game
 	 * @param {string | undefined} serialized
 	 */
-	constructor(serialized = undefined) {
+	 constructor(serialized = undefined) {
 		if (serialized) {
 			const [index, guesses, answers] = serialized.split('-');
 

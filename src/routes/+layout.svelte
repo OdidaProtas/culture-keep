@@ -3,12 +3,17 @@
 	import '../app.css';
 	import './styles.css';
 	import { onMount } from 'svelte';
-	import { diId } from './id';
+	import { diId, numCartItems } from './id';
 
 	onMount(() => {
 		let deviceID = localStorage.getItem('ld-id');
 		if (deviceID) {
 			diId.set(deviceID);
+			fetch(`/store/basket/items?basket-id=${deviceID}`).then((res) => {
+				res.json().then((data) => {
+					numCartItems.set(data);
+				});
+			});
 		} else {
 			let random = Math.round(Math.floor(Math.random() * (Math.random() * 123666)));
 			let date = Date.now();
@@ -31,15 +36,10 @@
 		<footer
 			class="p-4 bg-white  shadow md:flex md:items-center md:justify-between md:p-6 dark:bg-gray-800"
 		>
-			
 			<ul class="flex flex-wrap items-center mt-6 text-sm text-gray-500 dark:text-gray-400 sm:mt-0">
-				<!-- <li>
+				<li>
 					<a href="/about" class="mr-4 hover:underline md:mr-6 ">About</a>
 				</li>
-				<li>
-					<a href="/" class="mr-4 hover:underline md:mr-6">Privacy Policy</a>
-				</li>
-				 -->
 				<li>
 					<a href="/contact-us" class="hover:underline">Contact us</a>
 				</li>
@@ -48,7 +48,12 @@
 				</li>
 			</ul>
 			<span class="text-sm text-gray-500 sm:text-center dark:text-gray-400 mt-2"
-				>Made with ❤ by <a target="blank" href="https://linkedin.com/in/brian-odida" class="hover:underline">Protas Okoth Odida</a> & <a target="blank" href="https://twitter.com/Thriving_luos">DHOLUO Dictionary</a>
+				>Made with ❤ by <a
+					target="blank"
+					href="https://linkedin.com/in/brian-odida"
+					class="hover:underline">Protas Okoth</a
+				>
+				& <a target="blank" href="https://twitter.com/Thriving_luos">DHOLUO Dictionary</a>
 			</span>
 		</footer>
 	</div>
@@ -63,11 +68,10 @@
 
 	main {
 		flex: 1;
-		/* display: flex; */
-		/* flex-direction: column; */
+		display: flex;
+		flex-direction: column;
 		padding: 1rem;
 		width: 100%;
-		max-width: 64rem;
 		margin: 0 auto;
 		box-sizing: border-box;
 	}

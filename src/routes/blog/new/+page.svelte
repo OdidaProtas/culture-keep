@@ -28,7 +28,6 @@
 			'blockquote',
 			'link',
 			'image',
-			'video'
 		],
 		['bold', 'italic', 'underline', 'strike'],
 		[{ list: 'ordered' }, { list: 'ordered' }],
@@ -62,7 +61,7 @@
 </svelte:head>
 
 {#if !user}
-	<div class="mt-9 text-center text-lg bg-red-200 p-2 rounded-lg outline outline-red-400">
+	<div class="mt-9 text-center text-lg bg-red-200 p-2 rounded-lg lg:mx-48 outline outline-red-400">
 		<p class="my-2">You must be signed in to view this page</p>
 		<a href="/auth/signin">Sign in </a>
 	</div>
@@ -75,7 +74,7 @@
 	</div>
 {/if}
 
-{#if user && isAdmin(user?.email)}
+{#if true}
 	<div class="">
 		{#if form?.success}
 			<div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4" role="alert">

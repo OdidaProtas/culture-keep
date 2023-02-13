@@ -1,7 +1,4 @@
 <script>
-	import { onMount } from 'svelte';
-	import { diId } from './id';
-
 	export let data = {};
 
 	// @ts-ignore
@@ -13,22 +10,15 @@
 	<meta name="description" content="Svelte demo app" />
 </svelte:head>
 
-<section>
+<section class="lg:mx-18">
 	<span class=" text-center ">
-		<!-- <source srcset={welcome} type="image/webp" /> -->
-
 		<h1
-			class="mb-2 mt-9 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-gray-700"
+			class="mb-2 mt-9 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-3xl dark:text-gray-700"
 		>
-			DHOLUO Dictionary
+			Dholuo dictionary
 		</h1>
-		<p
-			class="mb-3 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400"
-		>
-			Inspired by JUOGI. REDISCOVERING HISTORY, CULTURE & FOLKLORE of the LUO of East & Central
-			Africa
-		</p>
-		<form action="/search">
+
+		<form class="lg:px-48" action="/search">
 			<label
 				for="default-search"
 				class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label
@@ -54,13 +44,13 @@
 					type="search"
 					id="q"
 					name="q"
-					class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-					placeholder="Search..."
+					class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-3xl mt-24 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+					placeholder="Search in DHOLUO, English or Swahili..."
 					required
 				/>
 				<button
 					type="submit"
-					class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+					class="text-white rounded-3xl absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
 					>Search</button
 				>
 			</div>
@@ -68,44 +58,48 @@
 	</span>
 </section>
 
-<div class="p-4 text-center text-lg">
-	<a href="/define">Define missing words</a>
-	<p />
-	<a href="/learn">Learn DHOLUO</a>
+<div class="p-4 justify-center flex mt-8 text-lg">
+	<a href="/define">Add definitions</a>
+	<a class="pl-4" href="/learn">Learn Dholuo</a>
+	<a class="pl-4" href="/sverdle">Games</a>
 </div>
 
-<div>
-	<div class="text-left mt-10 ">
-		<p class="text-lg">Discover</p>
-	</div>
+{#if words.length}
+	<div class="lg:mx-36">
+		<div class="text-left mt-10 ">
+			<p class="text-lg">Discover</p>
+		</div>
 
-	<div class="grid sm:grid-cols-1 lg:grid-cols-2 md:grid-cols-2 gap-4">
-		{#each words as word}
-			<div class="mt-2 bg-blue-200 rounded  p-4 pt-0">
-				<div class="card text-left w-full bg-primary text-primary-content pt-3">
-					<div class="card-body">
-						<h2 class="card-title  text-lg ">{word.word} - ({word.dialect})</h2>
-						<p class="my-3">{word.definition}</p>
-						<h2 class="text-lg my-2">Example</h2>
-						<p>{word.example}</p>
-						<h2 class="text-lg my-2">Translations</h2>
-						<p>English: {word.english}</p>
-						<p>Swahili: {word.swahili}</p>
-
-						<div class="mt-4">
-							<a
-								style="text-decoration: none;"
-								href={`/store?q=${word.word}`}
-								class="text-white mt-4  bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-								>Buy "{word.word}" Swag
-							</a>
+		<div>
+			<div class="grid sm:grid-cols-1 lg:grid-cols-2 md:grid-cols-2 gap-4">
+				{#each words as word}
+					<a class="text-black" style="text-decoration: none;" href={`/search?q=${word.word}`}>
+						<div class="mt-2 bg-blue-200 rounded-lg   p-4 pt-0">
+							<div class="card text-left w-full bg-primary text-primary-content pt-3">
+								<div class="card-body">
+									<h2 class="card-title  text-lg ">{word.word}</h2>
+									<hr />
+									<p class="my-3">{word.definition}</p>
+									<hr />
+									<p class="my-2 text-sm">
+										<span class="text-lg">Example usage: </span>{word.example}
+									</p>
+									<hr />
+									<div class="text-sm mt-3">
+										This word is available in <span class="text-blue-900  text-lg"
+											>{word.dialect}</span
+										>
+										Dholuo dialect(s)
+									</div>
+								</div>
+							</div>
 						</div>
-					</div>
-				</div>
+					</a>
+				{/each}
 			</div>
-		{/each}
+		</div>
 	</div>
-</div>
+{/if}
 
 <style>
 	section {

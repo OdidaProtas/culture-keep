@@ -5,7 +5,17 @@
 	</p>
 
 	<div class="mt-9">
-		<p class="mt-9 mb-4">Contact</p>
-		Phone:<a href="tel:+254 710 122 472">+254 710 122 472</a>
+		<a href="/store">Buy our custom dholuo hoodies / tshirts / mugs</a>
+	</div>
+
+	<!-- or
+	<p>
+		<a href="/support-us/donation">Make a donation</a>
+	</p> -->
+
+	<div class="my-9">
+		<p>
+			Contact admin: <a href="tel:+254 710 122 472">+254 710 122 472</a>
+		</p>
 	</div>
 </div>

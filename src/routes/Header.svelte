@@ -1,13 +1,12 @@
 <script>
 	import { page } from '$app/stores';
-	import { basket } from '../routes/store/basket';
-	import { diId } from '../routes/id';
+	import { diId, numCartItems } from '../routes/id';
 	import Menu from './Menu.svelte';
 </script>
 
 <header>
 	<div class="corner">
-		<Menu/>
+		<Menu />
 	</div>
 
 	<nav>
@@ -18,9 +17,9 @@
 			<li aria-current={$page.url.pathname === '/' ? 'page' : undefined}>
 				<a href="/">Home</a>
 			</li>
-			<li aria-current={$page.url.pathname === '/about' ? 'page' : undefined}>
+			<!-- <li aria-current={$page.url.pathname === '/about' ? 'page' : undefined}>
 				<a href="/about">About</a>
-			</li>
+			</li> -->
 			<!-- <li aria-current={$page.url.pathname.startsWith('/define') ? 'page' : undefined}>
 				<a href="/define">Define</a>
 			</li> -->
@@ -38,6 +37,7 @@
 
 	<div>
 		<div class="corner pr-2">
+			{$numCartItems ? $numCartItems : ''}
 			<a href={`/store/basket?basket-id=${$diId}`}>
 				<img alt="Cart" src="https://img.icons8.com/color/30/null/shopping-cart--v1.png" />
 			</a>

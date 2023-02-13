@@ -1,5 +1,8 @@
 // @ts-nocheck
 
+import { getTimestamp, mpesaSTKPush } from '$lib/pay/mpesa';
+import handleException from '$lib/pay/trycatch';
+import { error, redirect } from '@sveltejs/kit';
 import prisma from '../../../../db/prisma';
 
 
@@ -12,30 +15,72 @@ export const actions = {
 
         let basket = await prisma.order.findFirst({
             where: {
-                device: basketId
+                device: basketId,
+                status: "draft",
+                payment: null
             },
             include: {
-                Payment: true,
+                payment: true,
                 items: true
             }
         })
 
-        if (!basket?.Payment.length) {
-            let payment = await prisma.payment.create({
+
+        let orderAmount = (basket?.items ?? []).reduce((prev, curr) => {
+            return prev + curr.price
+        }, 0)
+
+
+        const stkPushPromise = mpesaSTKPush({
+            phone,
+            accountReference: basket.id,
+            amount: orderAmount,
+            transactionDesc: `Dholuo Dictionary Merch MPESA PAYMENT - ${phone} - ${basket.id}`
+        })
+
+        const [stkPushResponse, stkPushError] = await handleException(stkPushPromise)
+
+        if (stkPushError) {
+            console.log(stkPushError)
+            const payment = await prisma.payment.create({
                 data: {
                     phone,
-                    orderId: basket.id
+                    status: "error",
+                    timeStamp: getTimestamp()
                 }
             })
-        } let payment = await prisma.payment.update({
-            where: {
-                id: basket.Payment[0].id
-            },
-            data: {
-                phone,
-                orderId: basket.id
-            }
-        })
+            await prisma.order.update({
+                where: {
+                    id: basket.id
+                },
+                data: {
+                    paymentId: payment.id
+
+                }
+            })
+
+        }
+
+        if (stkPushResponse) {
+
+            let paymentRequestInformation = stkPushResponse?.data
+
+            const payment = await prisma.payment.create({
+                data: {
+                    phone,
+                    timeStamp: getTimestamp()
+                }
+            })
+            await prisma.order.update({
+                where: {
+                    id: basket.id
+                },
+                data: {
+                    status: "placed",
+                    paymentId: payment.id
+                }
+            })
+        }
 
 
     }
@@ -44,19 +89,28 @@ export const actions = {
 
 export async function load({ url }) {
 
-
     const basketId = url.searchParams.get("basket-id")
 
     const basket = await prisma.order.findFirst({
         where: {
-            device: basketId
+            device: basketId,
+            status: "draft",
         },
         include: {
-            Payment: true
+            payment: true,
+            items: true
         }
     })
 
-    return { payment: basket.Payment[0] }
+
+    if (!basket)
+        throw redirect("302", `/store/orders?ref=${basketId}`)
+
+    const totalAmount = basket?.items?.reduce((prev, curr) => {
+        return prev + curr.price;
+    }, 0);
+
+    return { payment: { ...basket?.payment, amount: totalAmount } }
 
 
 }

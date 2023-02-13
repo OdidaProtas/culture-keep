@@ -5,58 +5,82 @@ datasource db {
 
 // datasource db {
 //     provider = "sqlite"
-//     url   = env("DATABASE_URL")
+//     url      = env("DATABASE_URL")
 // }
 
 generator client {
     provider = "prisma-client-js"
 }
 
+model Student {
+    id           String  @id() @default(cuid())
+    user         User?   @relation(fields: [userId], references: [id])
+    userId       String?
+    status       String? @default("pending-confirmation")
+    contactPhone String
+}
+
 model Definition {
-    id         String  @id() @default(cuid())
-    word       String  @unique
+    id         String       @id() @default(cuid())
+    word       String       @unique
     definition String?
+    plural     String?
     english    String?
     swahili    String?
-    type       String? @default("word")
-    dialect    String  @default("all")
+    type       String?      @default("word")
+    dialect    String       @default("all")
     example    String?
+    Variations Variations[]
+    author     User?        @relation(fields: [userId], references: [id])
+    userId     String?
+    deleted    Boolean      @default(false)
+    flagged    Boolean      @default(false)
+}
+
+model Variations {
+    id           String     @id() @default(cuid())
+    dialect      String
+    word         String
+    definition   Definition @relation(fields: [definitionId], references: [id])
+    definitionId String
 }
 
 model Order {
     id           String      @id() @default(cuid())
     device       String?
     contactPhone String?
-    status       String?     @default("pending")
+    status       String?     @default("draft") //  placed, confirmed, in-transit, delivered 
     city         String?
     town         String?
     location     String?
     totalAmount  String?
     fullfiled    Boolean?    @default(false)
     items        OrderItem[]
-    Payment      Payment[]
+    payment      Payment?    @relation(fields: [paymentId], references: [id])
+    paymentId    String?
 }
 
 model Payment {
     id             String  @id() @default(cuid())
-    Order          Order?  @relation(fields: [orderId], references: [id])
     transactionRef String?
     status         String? @default("innitiated")
     phone          String?
-    orderId        String?
+    Order          Order[]
+    timeStamp      String?
 }
 
 model OrderItem {
-    id       String  @id() @default(cuid())
-    type     String
-    word     String?
-    color    String?
-    back     String?
-    size     String?
-    price    Int?
-    Order    Order?  @relation(fields: [orderId], references: [id])
-    orderId  String?
-    quantity Int?    @default(1)
+    id        String  @id() @default(cuid())
+    type      String
+    word      String?
+    color     String?
+    textColor String?
+    back      String?
+    size      String?
+    price     Int?
+    Order     Order?  @relation(fields: [orderId], references: [id])
+    orderId   String?
+    quantity  Int?    @default(1)
 }
 
 model BlogContent {
@@ -109,6 +133,8 @@ model User {
     accounts      Account[]
     sessions      Session[]
     BlogContent   BlogContent[]
+    Definition    Definition[]
+    Student       Student[]
 }
 
 model VerificationToken {

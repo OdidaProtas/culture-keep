@@ -1,5 +1,6 @@
 // @ts-nocheck
 
+import { redirect } from '@sveltejs/kit';
 import prisma from '../../../../db/prisma';
 
 export async function load({ url }) {
@@ -30,7 +31,8 @@ export const actions = {
             where: { id: param }
         });
 
-        return entry
+        if (entry)
+        throw redirect(302, `/blog/${entry.id}`)
 
     }
 };

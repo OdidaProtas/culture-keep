@@ -1,3 +1,3 @@
-export const POST = ()=>{
-    
-}
+export const GET = async () => {
+	return {};
+};

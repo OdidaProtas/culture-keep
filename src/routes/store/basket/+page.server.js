@@ -7,7 +7,7 @@ export const load = async ({ url }) => {
     let device = (url.searchParams.get("basket-id"))
 
     const order = await prisma.order.findFirst({
-        where: { device },
+        where: { device, status: "draft", payment: null },
         include: {
             items: true
         }

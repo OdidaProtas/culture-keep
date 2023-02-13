@@ -1,20 +1,29 @@
 <script>
 	// @ts-nocheck
 
-	export let stock;
-	export let variation;
+	// export let stock;
+	// export let variation;
 	export let frontWord;
+	export let thumbnail = false;
 
 	import { page } from '$app/stores';
 	let q = $page.url.searchParams.get('q');
+
+	import mug from '../../../../lib/assets/mug.jpg';
 </script>
 
 <div style="position:relative">
-	<img src={stock.mugs[variation]} alt="." height="200" class=" object-cover object-center " />
-	<div class="absolute inset-0 flex items-center justify-center">
-		<div class="bg-blue-500 mr-20 rounded-t-lg rounded-b-lg p-2 " style="border-radius: 50%/10%">
-			<p class="text-center text-xl max-w-xs lg:text-4xl	 text-white">{frontWord}</p>
+	<img src={mug} alt="." width={300} class=" object-cover rounded-lg object-center " />
+	{#if !thumbnail}
+		<div class="absolute inset-0 flex items-center justify-center">
+			<div
+				style="max-width:50%; border-radius: 50%/10%"
+				class="bg-blue-500 mr-14 rounded-t-lg rounded-b-lg p-2 "
+			>
+				<p class="text-center  text-sm lg:text-lg 	 text-white">
+					{frontWord ?? "Mit mar Nyasaye oloyo mar niang'"}
+				</p>
+			</div>
 		</div>
-		
-	</div>
+	{/if}
 </div>

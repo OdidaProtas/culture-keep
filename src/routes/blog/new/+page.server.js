@@ -1,4 +1,5 @@
 // @ts-nocheck
+import { redirect } from '@sveltejs/kit';
 import prisma from '../../../db/prisma';
 
 /** @type {import('./$types').Actions} */
@@ -15,7 +16,8 @@ export const actions = {
             data: { title, coverImage, content, slug }
         });
 
-        return entry
+        if (entry)
+            throw redirect(302, `/blog/${entry.id}`)
 
     }
 };

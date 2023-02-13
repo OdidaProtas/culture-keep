@@ -11,6 +11,7 @@ export const actions = {
 		const type = String(data.get('type'));
 		const back = String(data.get('back'));
 		const size = String(data.get('size'));
+		const textColor = String(data.get('textColor'));
 		const price = parseInt(String(data.get('price')));
 		const quantity = parseInt(String(data.get('quantity')));
 		const device = (String(data.get('device')));
@@ -18,7 +19,9 @@ export const actions = {
 		let existingOrder = await prisma.order.findFirst({
 			where: {
 				fullfiled: false,
-				device
+				device,
+				status: "draft",
+				payment: null
 			}
 		})
 
@@ -37,7 +40,8 @@ export const actions = {
 					back,
 					size,
 					price,
-					quantity
+					quantity,
+					textColor
 				}
 			})
 		} else {
@@ -50,7 +54,8 @@ export const actions = {
 					back,
 					size,
 					price,
-					quantity
+					quantity,
+					textColor
 
 				}
 			})

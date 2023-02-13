@@ -1,8 +1,19 @@
 // @ts-nocheck
 import prisma from "../../../db/prisma";
 
-export async function load({ }) {
-    const orders = await prisma.order.findMany({})
+export async function load({ url }) {
+    const device = url.searchParams.get("ref")
+    const orders = await prisma.order.findMany({
+        where: {
+            device,
 
-    return { orders }
+        },
+        include: {
+            items: true,
+            payment: true
+        }
+    })
+
+    return { orders: orders.filter(order => order.payment) }
 }
+

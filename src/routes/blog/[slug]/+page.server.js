@@ -1,15 +1,25 @@
 // @ts-nocheck
 
-import prisma from '../../../db/prisma';
+import { PrismaClient } from '@prisma/client'
 
-export async function load({ url }) {
+// import prisma from '../../../db/prisma';
+
+const prisma = new PrismaClient()
+
+export async function load({ url, params }) {
     const pathname = String(url.pathname)
-    const param = pathname.split("/blog/")[1]
+    const param = params.slug
+
 
     let post = await prisma.blogContent.findFirst({
         where: { id: param }
     })
-    return { post }
+
+    let other = await prisma.blogContent.findMany({
+        take: 10
+    })
+
+    return { post, more: other }
 }
 
 
@@ -19,8 +29,7 @@ export const actions = {
         const data = await request.formData();
         const id = String(data.get('id'));
         const isDelete = String(data.get('isDelete'));
-
-        if (!Boolean(isDelete)) {
+        if ((isDelete) === "false") {
             let post = await prisma.blogContent.findFirst({
                 where: { id }
             })

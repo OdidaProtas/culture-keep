@@ -15,6 +15,28 @@
 	import { page } from '$app/stores';
 
 	let user = $page.data.session?.user;
+	const q = $page.url.searchParams.get('word');
+
+	let word = q;
+
+	let variations = [];
+	let variation = { dialect: '', word: '' };
+
+	function handleVariationChange(name, val, i) {
+		let all = [...variations];
+		all[i] = { ...all[i], [name]: val };
+		variations = [...all];
+	}
+
+	function handleAddVariation() {
+		variations = [...variations, variation];
+	}
+
+	function handleRemoveVariation(index) {
+		let all = [...variations];
+		all.splice(index, 1);
+		variations = [...all];
+	}
 </script>
 
 <svelte:head>
@@ -22,12 +44,33 @@
 	<meta name="description" content="About this app" />
 </svelte:head>
 
+<div class="text-center lg:px-36">
+	<h1>Add definition {q ? `for "${q}"` : ''}</h1>
+	<p class="mb-6">
+		All words in this dictionary were written by people just like you. Now's your chance to add your
+		own!
+	</p>
+	<p>
+		Please review <a class="hover:no-underline" href="/guidelines"
+			>Dholuo Dictionary content guidelines</a
+		> before writing your definition. Here's the short version: Share definitions that other people will
+		find meaningful and never post hate speech or people’s personal information.
+	</p>
+</div>
+
 {#if !user}
-	<div class="text-center text-lg mt-20">You must be logged in to define missing words</div>
-	<div class="text-center mt-9">
-		<a href="/" class="mt-9">Take me back to the home page</a>
+	<div class="text-center text-lg mt-9">Login required.</div>
+	<div class="text-center">
 		<p class="mt-8" />
-		<a href="/auth/signin" class="mt-9">Sign in</a>
+		<button class="mt-9 text-white  text-lg rounded-3xl p-3 ox-4 bg-blue-700"
+			>Sign in with your Google account</button
+		>
+		<div class="mt-8">
+			<small
+				>This app only requests for your basic profile, i.e email address. We do not share any of
+				your data to 3rd parties.</small
+			>
+		</div>
 	</div>{/if}
 
 {#if user}
@@ -38,16 +81,6 @@
 				<p>Definition entry has been added</p>
 			</div>
 		{/if}
-		<h1>Define a word</h1>
-		<p class="mb-6">
-			All words in <a target="blank" href="/">DHOLUO Dictionary</a> were written by people just like
-			you. Now's your chance to add your own!
-		</p>
-		<p>
-			Please review <a href="/guidelines">DHOLUO Dictionary content guidelines</a> before writing your
-			definition. Here's the short version: Share definitions that other people will find meaningful
-			and never post hate speech or people’s personal information.
-		</p>
 
 		<form method="POST" class="mt-5">
 			<div class="mb-6">
@@ -81,6 +114,7 @@
 					placeholder="Type the word to define"
 					required
 					id="word"
+					bind:value={word}
 					name="word"
 				/>
 			</div>
@@ -124,6 +158,17 @@
 				/>
 			</div>
 			<div class="mb-6">
+				<label for="plural" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-500"
+					>Plural (Optional)</label
+				>
+				<input
+					id="plural"
+					name="plural"
+					class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+					placeholder="Plural"
+				/>
+			</div>
+			<div class="mb-6">
 				<label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-500"
 					>English Translation</label
 				>
@@ -147,9 +192,65 @@
 				/>
 			</div>
 
+			<p class="text-lg">Add Dialect variations</p>
+
+			{#each variations as variation, index}
+				<div class="flex gap-3 mt-4">
+					<div class="w-full">
+						<label
+							for="dia2"
+							class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-500">Dialect</label
+						>
+						<select
+							id="dia2"
+							onchange={(e) => handleVariationChange('dialect', e.target.value, index)}
+							bind:value={variation.dialect}
+							name="dia2"
+							required
+							class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+						>
+							<option selected value="">Select</option>
+							<option value="all">All</option>
+							<option value="joluo">Joluo (Kenya & Tanzania)</option>
+						</select>
+					</div>
+					<div class="w-full">
+						<label
+							for="wordw"
+							class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-500">Word</label
+						>
+						<input
+							onchange={(e) => handleVariationChange('word', e.target.value, index)}
+							bind:value={variation.word}
+							class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+							placeholder="Type the word to define"
+							required
+							id="wordw"
+							name="wordw"
+						/>
+					</div>
+					<div class="mt-3">
+						<button
+							on:click={() => handleRemoveVariation(index)}
+							type="button"
+							class="bg-red-500 text-white rounded-lg p-2"
+						>
+							Remove</button
+						>
+					</div>
+				</div>
+			{/each}
+			<div class="mt-3 mb-9">
+				<button
+					type="button"
+					on:click={handleAddVariation}
+					class="text-blue-500 outline-dashed rounded-lg p-2">Add variation</button
+				>
+			</div>
+			<input type="hidden" value={JSON.stringify(variations)} name="variations" id="variations" />
 			<button
 				type="submit"
-				class="text-white bg-blue-700 hover:bg-blue-800 mt-5 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+				class="text-white  bg-blue-700 hover:bg-blue-800 mt-5 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
 				>Submit</button
 			>
 		</form>

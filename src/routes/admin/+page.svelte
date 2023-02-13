@@ -12,13 +12,10 @@
 
 {#if !user}
 	<div class="text-center mt-20">
-		<div class="text-lg">Access to this page has been denied. You must be logged in as admin</div>
-		<button
-			on:click={() => signIn('google')}
-			class="mt-9 bg-blue-500 p-3 rounded-lg text-white text-lg"
-		>
-			Sign in with Google
-		</button>
+		<div class="text-lg">
+			Access to this page has been denied. You must be logged in with an administrator account
+		</div>
+		<a href="/">Back to Homepage</a>
 	</div>
 {/if}
 
@@ -34,16 +31,10 @@
 
 			<div class="grid sm:grid-cols-1 lg:grid-cols-2 md:grid-cols-2 gap-4 mt-9">
 				<a href="/admin/words">
-					<div class="bg-green-100 p-2 rounded-lg">Definitions</div>
+					<div class="bg-green-100 p-2 rounded-lg">Flagged words</div>
 				</a>
 				<a href="/admin/orders">
 					<div class="bg-green-100 p-2 rounded-lg">Orders</div>
-				</a>
-				<a href="/admin/blog">
-					<div class="bg-green-100 p-2 rounded-lg">Blog</div>
-				</a>
-				<a href="/admin/users">
-					<div class="bg-green-100 p-2 rounded-lg">Users</div>
 				</a>
 			</div>
 		{:else}

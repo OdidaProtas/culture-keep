@@ -2,16 +2,20 @@
 	// @ts-nocheck
 
 	import { diId } from '../../id';
+	import Hoodie from '../c/[category]/Hoodie.svelte';
+	import Mug from '../c/[category]/Mug.svelte';
+	import Tshirt from '../c/[category]/Tshirt.svelte';
 
 	function closeCart() {
 		history.back();
 	}
 	export let data = { order: { items: [] } };
 
-	const orderItems = data.order?.items;
-	const totalAmount = orderItems.reduce((prev, curr) => {
+	const orderItems = data.order?.items ?? [];
+	const totalAmount = orderItems?.reduce((prev, curr) => {
 		return prev + curr.price;
 	}, 0);
+
 </script>
 
 <div class="relative z-10" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
@@ -48,11 +52,7 @@
 									Shopping cart
 								</h2>
 								<div class="ml-3 flex h-7 items-center">
-									<button
-										on:click={closeCart}
-										type="button"
-										class="-m-2 p-2 text-gray-400 hover:text-gray-500"
-									>
+									<a href="/store" type="button" class="-m-2 p-2 text-gray-400 hover:text-gray-500">
 										<span class="sr-only">Close panel</span>
 										<!-- Heroicon name: outline/x-mark -->
 										<svg
@@ -70,13 +70,13 @@
 												d="M6 18L18 6M6 6l12 12"
 											/>
 										</svg>
-									</button>
+									</a>
 								</div>
 							</div>
 
 							<div class="mt-8">
 								<div class="flow-root">
-									{#if !orderItems.length}
+									{#if !orderItems?.length}
 										<div>
 											<p>Your shopping basket is currently empty</p>
 										</div>
@@ -87,22 +87,27 @@
 												<div
 													class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200"
 												>
-													<img
-														src="https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg"
-														alt="Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt."
-														class="h-full w-full object-cover object-center"
-													/>
+													{#if item.type === 'hoodies'}
+														<Hoodie thumbnail={true} />
+													{:else if item.type === 'tshirts'}
+														<Tshirt thumbnail={true} />
+													{:else}
+														<Mug thumbnail={true} />
+													{/if}
 												</div>
 
 												<div class="ml-4 flex flex-1 flex-col">
 													<div>
 														<div class="flex justify-between text-base font-medium text-gray-900">
 															<h3>
-																<a href="/">{item.word} lkl</a>
+																{item.word}
 															</h3>
 															<p class="ml-4">KES {item.price}</p>
 														</div>
-														<!-- <p class="mt-1 text-sm text-gray-500">Salmon</p> -->
+														<p class="mt-1 text-sm text-gray-500">Color: {item.color}</p>
+														{#if !(item.type === 'mugs')}
+															<p class="mt-1 text-sm text-gray-500">Size: {item.size}</p>
+														{/if}
 													</div>
 													<div class="flex flex-1 items-end justify-between text-sm">
 														<p class="text-gray-500">Qty {item.quantity}</p>
