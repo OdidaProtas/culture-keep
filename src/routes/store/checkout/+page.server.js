@@ -10,7 +10,7 @@ export const actions = {
         const city = String(data.get('city'));
         const town = String(data.get('town'));
         const location = String(data.get('location'));
-        const device = url.searchParams.get("basket-id");
+        const device = cookies.get("device-id");
 
         let existingOrder = await prisma.order.findFirst({
             where: {
@@ -38,8 +38,8 @@ export const actions = {
     }
 };
 
-export async function load({ url }) {
-    let basketId = url.searchParams.get("basket-id")
+export async function load({ url, cookies }) {
+    let basketId = cookies.get("device-id")
     const order = await prisma.order.findFirst({
         where: {
             device: basketId,
@@ -48,6 +48,6 @@ export async function load({ url }) {
         }
     })
     if (!order)
-        throw redirect("302", `/store/basket?basket-id=${basketId}`)
+        throw redirect("302", `/store/basket`)
     return { order }
 }

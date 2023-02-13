@@ -14,7 +14,9 @@ export const actions = {
 		const textColor = String(data.get('textColor'));
 		const price = parseInt(String(data.get('price')));
 		const quantity = parseInt(String(data.get('quantity')));
-		const device = (String(data.get('device')));
+
+		const device = (String(cookies.get('device-id')));
+
 
 		let existingOrder = await prisma.order.findFirst({
 			where: {

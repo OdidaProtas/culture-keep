@@ -13,7 +13,7 @@
 	let location;
 
 	import { page } from '$app/stores';
-	const basketId = $page.url.searchParams.get('basket-id');
+	const basketId = $page.url.searchParams.get('device-id');
 </script>
 
 <div class="relative z-10" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
@@ -156,7 +156,7 @@
 						<div class="border-t border-gray-200 py-6 px-4 sm:px-6">
 							<div class="mt-6">
 								<a
-									href={`/store/checkout/pay?basket-id=${basketId}`}
+									href={`/store/checkout/pay`}
 									class="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
 									>Proceed to payment</a
 								>

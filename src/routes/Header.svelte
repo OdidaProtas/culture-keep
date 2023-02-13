@@ -1,6 +1,6 @@
 <script>
 	import { page } from '$app/stores';
-	import { diId, numCartItems } from '../routes/id';
+	import { numCartItems } from '../routes/id';
 	import Menu from './Menu.svelte';
 </script>
 
@@ -37,11 +37,13 @@
 
 	<div>
 		<div class="corner pr-2">
-			<a href={`/store/basket?basket-id=${$diId}`}>
+			<a href={`/store/basket`}>
 				<span class="relative inline-block">
 					<img alt="Cart" src="https://img.icons8.com/color/30/null/shopping-cart--v1.png" />
 					<span
-						class="absolute top-0 right-0 px-2 py-1 text-xs font-bold leading-none text-red-100 transform bg-red-600 rounded-full">{$numCartItems}</span>
+						class="absolute top-0 right-0 px-2 py-1 text-xs font-bold leading-none text-red-100 transform bg-red-600 rounded-full"
+						>{$page.data.cartLength}</span
+					>
 				</span>
 			</a>
 		</div>

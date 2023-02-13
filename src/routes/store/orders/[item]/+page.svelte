@@ -65,9 +65,9 @@
 	<h2>Order REF: <span class="text-lg">{data?.order?.id}</span></h2>
 	<p>
 		Order Status: <span class="text-lg">
-			{data.order.status === 'placed'
+			{data?.order?.status === 'placed'
 				? 'Pending confirmation'
-				: data.order.status === 'draft'
+				: data?.order?.status === 'draft'
 				? 'Draft order'
 				: 'Confirmed'}
 		</span>

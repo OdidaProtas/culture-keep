@@ -10,7 +10,7 @@ import prisma from '../../../../db/prisma';
 export const actions = {
     default: async ({ cookies, request, url }) => {
         const data = await request.formData();
-        let basketId = url.searchParams.get("basket-id")
+        let basketId = cookies.get("device-id")
         const phone = String(data.get('phone'));
 
         let basket = await prisma.order.findFirst({
@@ -95,9 +95,9 @@ export const actions = {
 };
 
 
-export async function load({ url }) {
+export async function load({ url, cookies }) {
 
-    const basketId = url.searchParams.get("basket-id")
+    const basketId = cookies.get("device-id")
 
     const basket = await prisma.order.findFirst({
         where: {

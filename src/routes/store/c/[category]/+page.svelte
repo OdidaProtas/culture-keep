@@ -22,7 +22,6 @@
 		}
 	};
 	import { page } from '$app/stores';
-	import { diId } from '../../../id';
 	import { onMount } from 'svelte';
 	import Hoodie from './Hoodie.svelte';
 	import Tshirt from './Tshirt.svelte';
@@ -60,9 +59,7 @@
 		}
 	}
 
-	onMount(() => {
-		diId.set(localStorage.getItem('ld-id'));
-	});
+	
 
 	function handleAddToCart() {
 		let all = [...$basket];
@@ -281,7 +278,6 @@
 	</div>
 	<form class="w-full" method="POST">
 		<input value={frontWord} id="q" name="q" type="hidden" />
-		<input value={$diId} id="device" name="device" type="hidden" />
 		<input value={category} id="type" name="type" type="hidden" />
 		<input value={color} id="color" name="color" type="hidden" />
 		<input value={textColor} id="textColor" name="textColor" type="hidden" />

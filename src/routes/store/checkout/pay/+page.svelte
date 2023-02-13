@@ -7,7 +7,6 @@
 	export let data = { payment: '' };
 	let phone = '';
 
-	import { diId } from '../../../id';
 </script>
 
 <form method="POST">
@@ -105,7 +104,7 @@
 												Your order will be confirmed upon successful payment.
 											</small>
 											<div class="mt-4">
-												<a href={`/store/orders?ref=${$diId}`}>Track your order status here</a>
+												<a href={`/store/orders`}>Track your order status here</a>
 											</div>
 										</div>
 									{/if}

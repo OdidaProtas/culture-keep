@@ -4,10 +4,10 @@ import prisma from '../../../../db/prisma';
 
 
 /** @type {import('./$types').RequestHandler} */
-export async function GET({ url }) {
+export async function GET({ url, cookies }) {
 
 
-  const basketId = url.searchParams.get("basket-id")
+  const basketId = cookies.get("device-id")
 
   if (!basketId) return new Response(String(0));
 

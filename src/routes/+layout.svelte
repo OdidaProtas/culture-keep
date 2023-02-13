@@ -2,27 +2,6 @@
 	import Header from './Header.svelte';
 	import '../app.css';
 	import './styles.css';
-	import { onMount } from 'svelte';
-	import { diId, numCartItems } from './id';
-
-	onMount(() => {
-		let deviceID = localStorage.getItem('ld-id');
-		if (deviceID) {
-			diId.set(deviceID);
-			fetch(`/store/basket/items?basket-id=${deviceID}`).then((res) => {
-				res.json().then((data) => {
-					numCartItems.set(data);
-				});
-			});
-		} else {
-			let random = Math.round(Math.floor(Math.random() * (Math.random() * 123666)));
-			let date = Date.now();
-			let idDraft = `${random}${date}`;
-			localStorage.setItem('ld-id', idDraft);
-
-			diId.set(idDraft);
-		}
-	});
 </script>
 
 <div class="app">

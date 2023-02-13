@@ -1,7 +1,7 @@
 <script>
 	// @ts-nocheck
 
-	import { diId } from '../../id';
+
 	import Hoodie from '../c/[category]/Hoodie.svelte';
 	import Mug from '../c/[category]/Mug.svelte';
 	import Tshirt from '../c/[category]/Tshirt.svelte';
@@ -140,7 +140,7 @@
 							<div class="mt-6">
 								{#if orderItems.length > 0}
 									<a
-										href={`/store/checkout?basket-id=${$diId}`}
+										href={`/store/checkout`}
 										class="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
 										>Checkout</a
 									>

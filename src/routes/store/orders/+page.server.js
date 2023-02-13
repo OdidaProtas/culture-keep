@@ -1,8 +1,8 @@
 // @ts-nocheck
 import prisma from "../../../db/prisma";
 
-export async function load({ url }) {
-    const device = url.searchParams.get("ref")
+export async function load({ url, cookies }) {
+    const device = cookies.get("device-id")
     const orders = await prisma.order.findMany({
         where: {
             device,
