@@ -30,7 +30,7 @@
 			</div>
 		{/if}
 
-		<div class="mb-9">
+		<div class="mb-48">
 			{#if hasOrders}
 				<div class="grid sm:grid-cols-1 lg:grid-cols-2 md:grid-cols-2 gap-4">
 					{#each orders as order}

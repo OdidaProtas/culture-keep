@@ -61,12 +61,16 @@ model Order {
 }
 
 model Payment {
-    id             String  @id() @default(cuid())
-    transactionRef String?
-    status         String? @default("innitiated")
-    phone          String?
-    Order          Order[]
-    timeStamp      String?
+    id                String  @id() @default(cuid())
+    transactionRef    String?
+    status            String? @default("innitiated")
+    phone             String?
+    Order             Order[]
+    timeStamp         String?
+    checkoutRequestId String?
+    customerMessage   String?
+    responseCode      String?
+    mpesaReceipt      String?
 }
 
 model OrderItem {

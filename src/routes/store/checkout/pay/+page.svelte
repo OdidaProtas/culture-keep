@@ -75,7 +75,7 @@
 									<div class=" pt-6 ">
 										<h3 class="text-lg font-medium mb-4">Pay with MPesa</h3>
 
-										{#if data.payment?.status === 'error'}
+										<!-- {#if data.payment?.status === 'error'}
 											<div class="p-2 bg-red-200 rounded-lg mb-3">
 												<p class="text-lg">Request failed</p>
 												<small color="text-blue-800">
@@ -83,7 +83,7 @@
 													again or contact support for help
 												</small>
 											</div>
-										{/if}
+										{/if} -->
 										<div class="mb-4">
 											<input
 												class="w-full border border-gray-400 p-2"

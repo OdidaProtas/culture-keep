@@ -18,7 +18,6 @@ export const actions = {
 
 		let existingOrder = await prisma.order.findFirst({
 			where: {
-				fullfiled: false,
 				device,
 				status: "draft",
 				payment: null
@@ -31,7 +30,7 @@ export const actions = {
 					device
 				}
 			})
-			let item = await prisma.orderItem.create({
+			await prisma.orderItem.create({
 				data: {
 					orderId: order.id,
 					type,
@@ -45,7 +44,7 @@ export const actions = {
 				}
 			})
 		} else {
-			let item = await prisma.orderItem.create({
+			await prisma.orderItem.create({
 				data: {
 					orderId: existingOrder.id,
 					type,

@@ -33,7 +33,7 @@ export const actions = {
 
         const stkPushPromise = mpesaSTKPush({
             phone,
-            accountReference: basket.id,
+            accountReference: basket?.id,
             amount: orderAmount,
             transactionDesc: `Dholuo Dictionary Merch MPESA PAYMENT - ${phone} - ${basket.id}`
         })
@@ -41,12 +41,12 @@ export const actions = {
         const [stkPushResponse, stkPushError] = await handleException(stkPushPromise)
 
         if (stkPushError) {
-            console.log(stkPushError)
             const payment = await prisma.payment.create({
                 data: {
                     phone,
                     status: "error",
-                    timeStamp: getTimestamp()
+                    timeStamp: getTimestamp(),
+                    responseCode: "1111"
                 }
             })
             await prisma.order.update({
@@ -59,16 +59,21 @@ export const actions = {
                 }
             })
 
+            throw redirect("302", `/store/orders/${basket.id}`)
+
         }
 
         if (stkPushResponse) {
 
-            let paymentRequestInformation = stkPushResponse?.data
+            let paymentRequestInformation = stkPushResponse
 
             const payment = await prisma.payment.create({
                 data: {
                     phone,
-                    timeStamp: getTimestamp()
+                    timeStamp: getTimestamp(),
+                    checkoutRequestId: paymentRequestInformation.CheckoutRequestID,
+                    customerMessage: paymentRequestInformation.CustomerMessage,
+                    responseCode: paymentRequestInformation.ResponseCode
                 }
             })
             await prisma.order.update({
@@ -80,6 +85,9 @@ export const actions = {
                     paymentId: payment.id
                 }
             })
+
+            throw redirect("302", `/store/orders/${basket.id}`)
+
         }
 
 

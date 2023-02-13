@@ -8,11 +8,46 @@
 		return prev + curr.price;
 	}, 0);
 
+	let payment = data.order?.payment;
 </script>
 
 <div class="text-center my-9 text-3xl">
 	<p>Order details</p>
 </div>
+
+{#if payment?.responseCode === '0' && !payment?.mpesaReceipt}
+	<div class="bg-blue-200 p-2 rounded-lg my-4 text-left">
+		<h4 class="text-lg">Payment Details</h4>
+		<p class="mt-4">
+			{payment.customerMessage}. Please complete the transaction by entering your MPESA pin.
+		</p>
+		<small>You can refresh this page for a status update</small>
+	</div>
+{/if}
+
+{#if payment?.responseCode === '0' && payment?.mpesaReceipt}
+	<div class="bg-green-200 p-2 rounded-lg my-4 text-left">
+		<h4 class="text-lg">Payment Details</h4>
+		<p class="mt-4">Your payment for this order has been received, and processed successfully.</p>
+		<p class="text-lg">MPesa Receipt: payment?.mpesaReceipt</p>
+		<small>You can refresh this page for a status update</small>
+	</div>
+{/if}
+
+{#if payment?.responseCode === '1111'}
+	<div class="bg-red-200 p-2 rounded-lg my-4 text-left">
+		<h4 class="text-lg">Payment Details</h4>
+		<p class="mt-4">An error occured while processing your request</p>
+	</div>
+{/if}
+
+{#if payment?.responseCode !== '1111' && payment?.responseCode !== '0'}
+	<div class="bg-red-200 p-2 rounded-lg my-4 text-left">
+		<h4 class="text-lg">Payment Details</h4>
+		<p class="mt-4">An error occured while processing your request</p>
+		<p>Error Details: {payment.customerMessage}</p>
+	</div>
+{/if}
 
 <div class="my-16">
 	{#if data?.order?.payment?.status === 'error'}
