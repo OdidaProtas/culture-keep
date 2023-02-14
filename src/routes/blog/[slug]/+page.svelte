@@ -15,7 +15,7 @@
 	<meta property="og:title" content={data.post.title} />
 	<meta property="og:url" content={`https://dholuo-dictionary.me/blog/${data.post.id}`} />
 	<meta property="og:image" content={data.post.coverImage} />
-	<meta name="twitter:card" content="summary" />
+	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:site" content="@Thriving_luos" />
 	<meta name="twitter:title" content={data.post.title} />
 	<meta
