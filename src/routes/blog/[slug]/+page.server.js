@@ -20,6 +20,10 @@ export async function load({ url, params }) {
         take: 10
     })
 
+    if (!post) {
+        throw redirect(302, '/blog')
+    }
+
     return { post, more: other }
 }
 
