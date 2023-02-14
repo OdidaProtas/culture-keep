@@ -39,7 +39,7 @@ export const actions = {
 		if (JSON.parse(edit ?? "")) {
 			const q = url.searchParams.get("word")
 			const entry = await prisma.definition.update({
-				where: { q },
+				where: { word: q },
 				data: { word, definition, dialect, example, english, swahili, plural, imageUrl, slug }
 			});
 
