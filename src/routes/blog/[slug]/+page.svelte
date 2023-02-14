@@ -8,6 +8,15 @@
 	const isAdm = isAdmin(user?.email);
 </script>
 
+<svelte:head>
+	<title>{data.post.title}</title>
+	<meta name="keywords" content="DHOLUO, Luo, LUO Blog, Luo Stories" />
+	<meta name="description" content={data.post.title} />
+	<meta property="og:title" content={data.post.title} />
+	<meta property="og:url" content={`https://dholuo-dictionary.me/blog/${data.post.id}`} />
+	<meta property="og:image" content={data.post.coverImage} />
+</svelte:head>
+
 {#if !data.post}
 	<div class="flex align-middle justify-center h-full text-lg text-center mt-20">
 		<div>
@@ -19,8 +28,6 @@
 
 {#if data.post}
 	<div>
-		<h1>{data.post.title}</h1>
-		<hr />
 		<div class="my-6 lg:mx-48">
 			{#if !data.post.published}
 				<div class="bg-yellow-200 p-2 outline-yellow-400 rounded-lg">
@@ -32,10 +39,18 @@
 		</div>
 
 		<div class="lg:flex gap-4">
-			<div class="my-9 flex-1  bg-white p-3 rounded-3xl">
-				{@html data.post.content}
+			<div class="mb-9 flex-1  bg-white p-3 rounded-lg">
+				<h6 class="text-2xl">{data.post.title}</h6>
+				<div>
+					{#if data.post.coverImage}
+						<img class="w-full" src={data.post.coverImage} alt="Cover" />
+					{/if}
+				</div>
+				<div class="my-6">
+					{@html data.post.content}
+				</div>
 				{#if isAdm}
-					<div class="flex justify-between">
+					<div class="flex justify-evenly">
 						<form method="POST">
 							<input value={data.post.id} type="hidden" id="id" name="id" />
 							<input value={false} type="hidden" id="isDelete" name="isDelete" />
@@ -67,7 +82,7 @@
 
 				<div>
 					{#each data.more as word}
-						<a  href={`/blog/${word.id}`}>
+						<a href={`/blog/${word.id}`}>
 							{word.title}
 						</a>
 						<hr />
@@ -78,7 +93,7 @@
 	</div>
 {/if}
 
-<div  >
+<div>
 	<h1>More read</h1>
 
 	<div class="grid sm:grid-cols-1 lg:grid-cols-2 md:grid-cols-2 gap-4">

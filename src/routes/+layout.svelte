@@ -6,12 +6,10 @@
 
 <div class="app">
 	<Header />
-
 	<main>
 		<slot />
 	</main>
-
-	<div>
+	<div class="mt-16" >
 		<footer
 			class="p-4 bg-white  shadow md:flex md:items-center md:justify-between md:p-6 dark:bg-gray-800"
 		>
@@ -26,14 +24,6 @@
 					<a href="/support-us" class="ml-4 hover:underline md:mr-6">Support us</a>
 				</li>
 			</ul>
-			<span class="text-sm text-gray-500 sm:text-center dark:text-gray-400 mt-2"
-				>Made with ❤ by <a
-					target="blank"
-					href="https://linkedin.com/in/brian-odida"
-					class="hover:underline">Protas Okoth</a
-				>
-				& <a target="blank" href="https://twitter.com/Thriving_luos">DHOLUO Dictionary</a>
-			</span>
 		</footer>
 	</div>
 </div>

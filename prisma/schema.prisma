@@ -13,11 +13,11 @@ generator client {
 }
 
 model Student {
-    id           String  @id() @default(cuid())
-    user         User?   @relation(fields: [userId], references: [id])
-    userId       String?
-    status       String? @default("pending-confirmation")
-    contactPhone String
+    id     String  @id() @default(cuid())
+    user   User?   @relation(fields: [userId], references: [id])
+    userId String?
+    status String? @default("pending-confirmation")
+    email  String?
 }
 
 model Definition {
@@ -35,6 +35,8 @@ model Definition {
     userId     String?
     deleted    Boolean      @default(false)
     flagged    Boolean      @default(false)
+    imageUrl   String?
+    slug       String?      @unique
 }
 
 model Variations {

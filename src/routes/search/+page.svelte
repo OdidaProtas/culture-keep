@@ -39,6 +39,7 @@
 		if (i === 0) return c.toUpperCase();
 		return prev + c.toLowerCase();
 	}, '');
+	console.log(data);
 </script>
 
 <svelte:head>
@@ -69,7 +70,9 @@
 			<p class="mt-9">English : {data.english}</p>
 			<p>Swahili : {data.swahili}</p>
 		</div>
-
+		{#if data.imageUrl}
+			<img width={200} src={data.imageUrl} alt={data.word} />
+		{/if}
 		<hr />
 		<div class="my-3">
 			<p class="text-sm">

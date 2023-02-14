@@ -1,5 +1,6 @@
 // @ts-nocheck
 
+import { convertToSlug } from '$lib/str/slug';
 import { redirect } from '@sveltejs/kit';
 import prisma from '../../../../db/prisma';
 
@@ -21,7 +22,7 @@ export const actions = {
         const coverImage = String(data.get('coverImage'));
         const content = String(data.get('content'));
 
-        const slug = title.split(" ").join("_").trim().toLowerCase()
+        const slug = convertToSlug(title)
 
         const pathname = String(url.pathname)
         const param = pathname.split("/blog/")[1].split("/edit")[0]
@@ -32,7 +33,7 @@ export const actions = {
         });
 
         if (entry)
-        throw redirect(302, `/blog/${entry.id}`)
+            throw redirect(302, `/blog/${entry.id}`)
 
     }
 };

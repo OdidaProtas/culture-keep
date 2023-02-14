@@ -3,10 +3,10 @@ import prisma from "../../db/prisma";
 
 async function getWords() {
 	let words = await prisma.definition.findMany({
-		take: 5000
+		take: 10000
 	})
 
-	return (words.map(({ word }) => word))
+	return (words.filter(({ word }) => word.length === 5).map(({ word }) => word))
 
 }
 

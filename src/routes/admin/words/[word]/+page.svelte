@@ -60,6 +60,12 @@
 					>{data?.flagged ? 'Undo flag' : 'Flag word'}
 				</button>
 			</form>
+			<div class="pt-1">
+				<a
+					class="bg-blue-500 p-2 px-4  hover:no-underline rounded-3xl ml-2 text-sm text-white"
+					href={`/define?word=${data?.word}&edit=true`}>Edit</a
+				>
+			</div>
 		</div>
 
 		<hr />

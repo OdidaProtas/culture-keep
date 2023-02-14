@@ -4,9 +4,7 @@ import prisma from "../../../db/prisma"
 export async function load({ url }) {
 
     const words = await prisma.definition.findMany({
-        where: {
-            flagged: true
-        }
+        take: 5000
     })
     return { words }
 }

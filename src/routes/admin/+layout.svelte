@@ -9,7 +9,7 @@
 {/if}
 
 {#if !isAdmin(user?.email)}
-	<div class="text-center mt-20">
+<div class="text-center mt-20">
 		<div class="text-lg">
 			Access to this page has been denied. You must be logged in with an administrator account
 		</div>

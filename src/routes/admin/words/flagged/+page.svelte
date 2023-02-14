@@ -11,27 +11,24 @@
 </script>
 
 <div class="text-center">
-	<h1>Definitions</h1>
+	<h1>Flagged Definitions</h1>
 </div>
 
 {#if !hasWords}
 	<div class="text-center text-lg mt-9">
 		{#if !q}
-			<p>No words have been added</p>
+			<p>No words have been flagged</p>
 		{:else}
 			<p>No search results for {q}</p>
 		{/if}
 	</div>
 {/if}
 
-<div class="flex mt-9 justify-between text-lg lg:px-48">
+<div class="flex mt-20 justify-between text-lg lg:px-48">
 	<div class="mt-4">
 		<p>{words.length} <span class="text-lg text-red-500" /> Words</p>
 	</div>
-	<div class="mt-4 flex ">
-		<a href="/define">Add</a>
-		<a class="ml-4" href="/admin/words/flagged">Flagged</a>
-		<a class="ml-4" href="/admin/words/deleted">Deleted</a>
+	<div class="mt-4">
 	</div>
 </div>
 
