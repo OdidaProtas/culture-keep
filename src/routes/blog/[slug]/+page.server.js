@@ -1,6 +1,7 @@
 // @ts-nocheck
 
 import { PrismaClient } from '@prisma/client'
+import { redirect } from '@sveltejs/kit'
 
 // import prisma from '../../../db/prisma';
 
@@ -52,5 +53,7 @@ export const actions = {
         else await prisma.blogContent.delete({
             where: { id }
         })
+
+        throw redirect(302, "/blog")
     }
 };
