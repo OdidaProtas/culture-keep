@@ -39,6 +39,7 @@ export async function mpesaSTKPush({
 			Authorization: authorizationToken
 		}
 	});
+
 	const [mpesaAuthResponse, mpesaAuthError] = await handleException(mpesaUathRequetsPromise);
 	if (mpesaAuthError) throw new Error(mpesaAuthError);
 

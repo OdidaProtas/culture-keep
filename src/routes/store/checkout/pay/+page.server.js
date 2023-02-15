@@ -26,6 +26,8 @@ export const actions = {
         })
 
 
+
+
         let orderAmount = (basket?.items ?? []).reduce((prev, curr) => {
             return prev + curr.price
         }, 0)
@@ -39,6 +41,8 @@ export const actions = {
         })
 
         const [stkPushResponse, stkPushError] = await handleException(stkPushPromise)
+
+
 
         if (stkPushError) {
             const payment = await prisma.payment.create({

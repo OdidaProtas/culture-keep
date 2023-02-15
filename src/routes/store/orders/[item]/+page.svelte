@@ -37,7 +37,7 @@
 {#if payment?.responseCode === '1111'}
 	<div class="bg-red-200 p-2 rounded-lg my-4 text-left">
 		<h4 class="text-lg">Payment Details</h4>
-		<p class="mt-4">An error occured while processing your request</p>
+		<p class="mt-4">An error occured while processing your request. Contact support for help</p>
 	</div>
 {/if}
 
@@ -49,17 +49,6 @@
 	</div>
 {/if}
 
-<div class="my-16">
-	{#if data?.order?.payment?.status === 'error'}
-		<div class="p-2 bg-red-200 rounded-lg mb-3">
-			<p class="text-lg">Payment error</p>
-			<small color="text-blue-800">
-				An error occured while processing your request. Check phone number and try again or contact
-				support for help
-			</small>
-		</div>
-	{/if}
-</div>
 
 <div>
 	<h2>Order REF: <span class="text-lg">{data?.order?.id}</span></h2>

@@ -21,7 +21,7 @@
 			? 'Draft order'
 			: 'Confirmed'}
 	</p>
-	<p>Order Amount: {totalAmount}</p>
+	<p>Order Amount: {totalAmount}</p>or
 	<hr />
 	<div class="mt-9">
 		<p class="text-2xl">Order Items:</p>

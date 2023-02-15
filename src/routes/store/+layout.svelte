@@ -100,7 +100,7 @@
 			>
 				<a
 					rel="noopener noreferrer"
-					href={`/store/c/hoodies${q ? `?q=${q}` : 'Custom text'}`}
+					href={`/store/c/hoodies${q ? `?q=${q}` : '?q=Custom text'}`}
 					class="px-8 py-3 text-lg rounded-3xl hover:no-underline font-semibold  dark:bg-violet-400 dark:text-gray-900"
 					>Customize hoodie</a
 				>
@@ -140,14 +140,14 @@
 			class="flex flex-col justify-center text-center rounded-sm lg:max-w-md xl:max-w-lg lg:text-left"
 		>
 			<h1 class="text-5xl font-bold leading-none sm:text-6xl">
-				 <span class="text-yellow-700">Quote it</span>, customize it.
+				<span class="text-yellow-700">Quote it</span>, customize it.
 			</h1>
 			<div
 				class="flex mt-4 flex-col space-y-4 sm:items-center sm:justify-center sm:flex-row sm:space-y-0 sm:space-x-4 lg:justify-center"
 			>
 				<a
 					rel="noopener noreferrer"
-					href={`/store/c/mugs${q ? `?q=${q}` : 'Custom text'}`}
+					href={`/store/c/mugs${q ? `?q=${q}` : '?q=Custom text'}`}
 					class="px-8 py-3 text-lg rounded-3xl hover:no-underline font-semibold  dark:bg-violet-400 dark:text-gray-900"
 					>Customize mug</a
 				>

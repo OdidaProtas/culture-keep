@@ -44,7 +44,8 @@ export async function load({ url, cookies }) {
         where: {
             device: basketId,
             fullfiled: false,
-            status: "draft"
+            status: "draft",
+            payment: null
         }
     })
     if (!order)
