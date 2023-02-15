@@ -22,7 +22,6 @@
 		}
 	};
 	import { page } from '$app/stores';
-	import { onMount } from 'svelte';
 	import Hoodie from './Hoodie.svelte';
 	import Tshirt from './Tshirt.svelte';
 	import Mug from './Mug.svelte';
@@ -58,8 +57,6 @@
 			count = count - 1;
 		}
 	}
-
-	
 
 	function handleAddToCart() {
 		let all = [...$basket];
@@ -109,19 +106,17 @@
 </div>
 
 <div class="  justify-start lg:inline md:flex-col">
-	<div class=" flex-1 bg-white p-2 rounded-lg">
+	<div class=" flex-1  p-2 rounded-lg">
 		<div class="group relative">
-			<div
-				class="min-h-80 w-full  rounded-md flex justify-center group-hover:opacity-75 lg:aspect-none "
-			>
+			<div class="min-h-80 w-full  rounded-md flex justify-center lg:aspect-none ">
 				{#if isTshirts}
-					<Tshirt {frontWord} {stock} {variation} />
+					<Tshirt {color} {textColor} carouselOff={true} {frontWord} {stock} {variation} />
 				{/if}
 				{#if isMug}
-					<Mug {frontWord} {stock} {variation} />
+					<Mug carouselOff={true} {frontWord} {stock} {variation} {textColor} {color} />
 				{/if}
 				{#if isHoodies}
-					<Hoodie {textColor} {frontWord} {stock} {variation} />
+					<Hoodie {color} carouselOff={true} {textColor} {frontWord} {stock} {variation} />
 				{/if}
 			</div>
 			<div class="mt-4 flex justify-between">
@@ -225,18 +220,20 @@
 		>Gray</button
 	>
 	<button
-		on:click={() => (color = 'red')}
+		on:click={() => {
+			color = 'red';
+		}}
 		class={`btn m-2 text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800`}
 		>Red</button
 	>
 	<button
 		on:click={() => (color = 'green')}
-		class={`btn m-2 text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-green-600 dark:hover:bg-red-700 dark:focus:ring-green-800`}
+		class={`btn m-2 text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800`}
 		>Green</button
 	>
 </div>
 <div class="p-2 mt-5 text-lg">Text color</div>
-<div class="flex justify-start">
+<div class="flex flex-wrap justify-start">
 	<button
 		on:click={() => (textColor = 'white')}
 		class={`btn ml-2 text-black bg-white-700 hover:bg-white-800 focus:ring-4 focus:outline-none focus:ring-white-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-white dark:hover:bg-gray-300 dark:focus:ring-gray-300`}

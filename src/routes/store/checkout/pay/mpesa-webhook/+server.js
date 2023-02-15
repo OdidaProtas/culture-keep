@@ -7,10 +7,14 @@ export async function POST({ url, request }) {
 
     try {
         let data = await request.json()
+
+        await prisma.tran.create({
+            data: {
+                str: JSON.stringify(data)
+            }
+        })
         const body = (data?.Body) ?? {}
-        console.log("body", body)
-        console.log("data", data)
-        
+
         const stkCallback = body.stkCallback;
         const checkoutId = stkCallback.CheckoutRequestID
         const responseCode = stkCallback.ResultCode
@@ -44,4 +48,8 @@ export async function POST({ url, request }) {
     return new Response(String({
         success: "0000000"
     }))
+}
+
+export async function GET() {
+    return new Response(await prisma.tran.findMany())
 }

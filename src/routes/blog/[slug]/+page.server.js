@@ -1,11 +1,10 @@
 // @ts-nocheck
 
 import { PrismaClient } from '@prisma/client'
-import { redirect } from '@sveltejs/kit'
+import { error, redirect } from '@sveltejs/kit'
 
-// import prisma from '../../../db/prisma';
+import prisma from '../../../db/prisma';
 
-const prisma = new PrismaClient()
 
 export async function load({ url, params }) {
     const pathname = String(url.pathname)
@@ -13,12 +12,15 @@ export async function load({ url, params }) {
 
 
     let post = await prisma.blogContent.findFirst({
-        where: { id: param }
+        where: { id: param },
+        include: { comments: true }
     })
 
     let other = await prisma.blogContent.findMany({
         take: 10
     })
+
+    other = [...other].filter(({ id }) => id !== param)
 
     if (!post) {
         throw redirect(302, '/blog')
@@ -30,7 +32,7 @@ export async function load({ url, params }) {
 
 /** @type {import('./$types').Actions} */
 export const actions = {
-    default: async ({ cookies, request, url }) => {
+    actions: async ({ request }) => {
         const data = await request.formData();
         const id = String(data.get('id'));
         const isDelete = String(data.get('isDelete'));
@@ -59,5 +61,24 @@ export const actions = {
         })
 
         throw redirect(302, "/blog")
+    },
+    async comment({ request, locals, params }) {
+        const data = await request.formData();
+        const blogContentId = params.slug
+        const content = data.get("content")
+        const session = await locals.getSession()
+        if (!session) {
+            throw error(403, "You must be signed in to add comments")
+        }
+
+        const comment = await prisma.comment.create({
+            data: {
+                content,
+                blogContentId,
+                authorName: session.user.name,
+                authorEmail: session.user.email,
+            }
+        })
+        return {...comment, success:true}
     }
 };

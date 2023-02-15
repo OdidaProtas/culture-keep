@@ -6,6 +6,8 @@
 	import { isAdmin } from '../../../db/authbodge';
 	const user = $page.data.session?.user;
 	const isAdm = isAdmin(user?.email);
+	export let form;
+	const comments = data.post.comments ?? [];
 </script>
 
 <svelte:head>
@@ -36,19 +38,43 @@
 
 {#if data.post}
 	<div>
-		<div class="my-6 lg:mx-48">
-			{#if !data.post.published}
-				<div class="bg-yellow-200 p-2 outline-yellow-400 rounded-lg">
-					<p class="text-lg">Warning</p>
-					This blog post has not been published. Any information shared will in this post will only be
-					visible to the author
-				</div>
-			{/if}
-		</div>
+		{#if isAdm}
+			<div class="flex justify-end mb-3 rounded  p-2">
+				<form action="?/actions" method="POST">
+					<input value={data.post.id} type="hidden" id="id" name="id" />
+					<input value={false} type="hidden" id="isDelete" name="isDelete" />
+					{#if data.post.published}
+						<button class="bg-red-600 text-white rounded px-4 py-2 " type="submit">Unpublish</button
+						>
+					{/if}
+					{#if !data.post.published}
+						<button class="bg-green-600 px-4 py-2  rounded-lg text-white" type="submit"
+							>Publish</button
+						>
+					{/if}
+				</form>
+				<a
+					class="bg-blue-600 text-white px-4 py-2 mx-3 rounded hover:no-underline"
+					href={`/blog/${data.post.id}/edit`}>Edit</a
+				>
+				<form action="?/actions" method="POST">
+					<input value={data.post.id} type="hidden" id="id" name="id" />
+					<input value={true} type="hidden" id="isDelete" name="isDelete" />
 
+					<button class="bg-red-600 text-white rounded px-4 py-2 " type="submit">Delete</button>
+				</form>
+			</div>
+		{/if}
 		<div class="lg:flex gap-4">
 			<div class="mb-9 flex-1  bg-white p-3 rounded-lg">
 				<h6 class="text-2xl">{data.post.title}</h6>
+				{#if !data.post.published}
+					<div class="bg-yellow-200 p-2 my-8 outline-yellow-400 rounded-lg">
+						<p class="text-lg">Warning</p>
+						This blog post has not been published. Any information shared will in this post will only
+						be visible to the author
+					</div>
+				{/if}
 				<div>
 					{#if data.post.coverImage}
 						<img class="w-full" src={data.post.coverImage} alt="Cover" />
@@ -57,42 +83,66 @@
 				<div class="my-6">
 					{@html data.post.content}
 				</div>
-				{#if isAdm}
-					<div class="flex justify-evenly">
-						<form method="POST">
-							<input value={data.post.id} type="hidden" id="id" name="id" />
-							<input value={false} type="hidden" id="isDelete" name="isDelete" />
-							{#if data.post.published}
-								<button class="bg-red-600 text-white rounded px-4 py-2 " type="submit"
-									>Unpublish</button
-								>
-							{/if}
-							{#if !data.post.published}
-								<button class="bg-green-600 px-4 py-2  rounded-lg text-white" type="submit"
-									>Publish</button
-								>
-							{/if}
-						</form>
-						<a href={`/blog/${data.post.id}/edit`}>Edit post</a>
-						<form method="POST">
-							<input value={data.post.id} type="hidden" id="id" name="id" />
-							<input value={true} type="hidden" id="isDelete" name="isDelete" />
+				<div class=" rounded mt-3 bg-gray-200 p-2">
+					<p class="text-lg mt-2">Comments</p>
+					<div class="mt-4 pl-3">
+						{#each comments as comment}
+							<div class="mb-4">
+								<p class="text-lg">{comment.content}</p>
+								<small class="ml-3 text-sm">> By {comment.authorName}</small>
+							</div>
+							<hr />
+						{/each}
+					</div>
 
-							<button class="bg-red-600 text-white rounded px-4 py-2 " type="submit"
-								>DELETE POST</button
+					{#if user}
+						<form action="?/comment" class="mt-4" method="POST">
+							<label for="content" class="sr-only" />
+							{#if form?.success}
+								<div class="bg-green-200 p-3 rounded my-3">
+									<p>Comment added</p>
+								</div>
+							{/if}
+							<textarea
+								required
+								name="content"
+								id="content"
+								placeholder="Add a comment"
+								class="w-full p-2 rounded"
+								rows="3"
+							/>
+							<p class="text-sm">
+								Any comment that does not follow our <a href="/guidelines">content guidelines</a> will
+								be deleted, and you will be banned from adding comments
+							</p>
+							<button type="submit" class="bg-blue-500 p-2 mt-3 text-white rounded"
+								>Save comment</button
 							>
 						</form>
-					</div>
-				{/if}
+					{/if}
+					{#if !user}
+						<div class="bg-yellow-200 p-3 rounded my-3">
+							<p>You must be signed in to comment</p>
+							<a href="/auth/signin">View signin options</a>
+						</div>
+					{/if}
+				</div>
 			</div>
+
 			<div class="w-96 ">
-				<h3>More Stories</h3>
+				<h3 class="text-lg">More Stories</h3>
 
 				<div>
 					{#each data.more as word}
-						<a href={`/blog/${word.id}`}>
-							{word.title}
-						</a>
+						<div class="my-3">
+							{#if word.coverImage}
+								<img style="height:180px" src={word.coverImage} alt="" />
+							{/if}
+							<a class="hover:no-underline" href={`/blog/${word.id}`}>
+								{word.title}
+							</a>
+							<p>1 min read</p>
+						</div>
 						<hr />
 					{/each}
 				</div>
@@ -100,15 +150,3 @@
 		</div>
 	</div>
 {/if}
-
-<div>
-	<h1>More read</h1>
-
-	<div class="grid sm:grid-cols-1 lg:grid-cols-2 md:grid-cols-2 gap-4">
-		{#each data.more as word}
-			<a href={`/blog/${word.id}`}>
-				{word.title}
-			</a>
-		{/each}
-	</div>
-</div>

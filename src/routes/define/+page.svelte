@@ -9,7 +9,7 @@
 	let user = $page.data.session?.user;
 	const q = $page.url.searchParams.get('word');
 	const editStr = $page.url.searchParams.get('edit');
-	const isEdit = JSON.parse(editStr ?? '');
+	const isEdit = Boolean(editStr);
 
 	import { uploadCloudinary } from '$lib/files/upload';
 	import Dropzone from 'svelte-file-dropzone';

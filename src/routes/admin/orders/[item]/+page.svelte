@@ -12,7 +12,7 @@
 	<p>Order details</p>
 </div>
 
-<div>
+<div class="lg:mx-48" >
 	<h2>Order REF: {data?.order?.id}</h2>
 	<p>
 		Order Status: {data.order.status === 'placed'

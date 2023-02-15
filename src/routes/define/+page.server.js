@@ -19,6 +19,7 @@ export const actions = {
 
 		const slug = convertToSlug(word)
 
+
 		if (!JSON.parse(edit ?? "")) {
 			const entry = await prisma.definition.create({
 				data: { word, definition, dialect, example, english, swahili, plural, imageUrl, slug }

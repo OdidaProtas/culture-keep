@@ -6,13 +6,20 @@
 </script>
 
 {#if data?.student && data.student.status === 'pending-confirmation'}
-	<div class="p-2 rounded-lg-bg-green-200 text-black">
+	<div class="p-2 rounded-lg-bg-green-200 text-center text-lg mt-20 text-black">
+		<p class="mb-4 text-lg">Hello {user?.name?.split(' ')[0]}</p>
 		<p>Your request for enrollment has been received.</p>
+		<p class="mt-9 text-sm">You will receive an email with further instructions</p>
+		<div class="mt-20 ">
+			<a class="hover:no-underline" href="/">Search words</a>
+			<a class="ml-9 hover:no-underline" href="/store">Shop customized wear</a>
+			<a class="ml-9 hover:no-underline" href="/store">Play a guessing game</a>
+		</div>
 	</div>
 {/if}
 
 {#if !data?.student}
-	{#if !user}
+	{#if user}
 		<div class="text-center mt-20 text-lg lg:px-48">
 			<p class="mt-3">Enroll to Dholuo classes</p>
 			<div class="mt-6">
@@ -26,7 +33,7 @@
 	{/if}
 {/if}
 
-{#if user}
+{#if !user}
 	<div class="text-center mt-20 text-lg lg:px-48">
 		<p>Learn Dholuo</p>
 		<div class="mt-20">

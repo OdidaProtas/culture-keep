@@ -34,8 +34,6 @@
 		type: 'word'
 	};
 
-	
-
 	import { onMount } from 'svelte';
 
 	let editor;
@@ -100,7 +98,7 @@
 {/if}
 
 {#if isAdm}
-	<div class="">
+	<div class="lg:mx-48">
 		{#if form?.success}
 			<div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4" role="alert">
 				<p class="font-bold">Success</p>

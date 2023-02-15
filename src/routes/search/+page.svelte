@@ -39,7 +39,6 @@
 		if (i === 0) return c.toUpperCase();
 		return prev + c.toLowerCase();
 	}, '');
-	console.log(data);
 </script>
 
 <svelte:head>
@@ -113,13 +112,13 @@
 			</div>
 			<div class="lg:flex mt-9">
 				<div>
-					<Hoodie frontWord={uppercased} />
+					<Hoodie carouselOff frontWord={uppercased} />
 					<div class="text-center mt-3">
 						<a href={`/store/c/hoodies?q=${q}`}>Customize Hoodie</a>
 					</div>
 				</div>
 				<div>
-					<Tshirt frontWord={uppercased} />
+					<Tshirt carouselOff frontWord={uppercased} />
 					<div class="text-center mt-1">
 						<a href={`/store/c/tshirts?q=${q}`}>Customize Tshirt</a>
 					</div>
@@ -127,7 +126,7 @@
 			</div>
 			<div class="flex justify-center mt-9">
 				<div>
-					<Mug frontWord={uppercased} />
+					<Mug carouselOff frontWord={uppercased} />
 					<div class="text-center mt-3">
 						<a href={`/store/c/mugs?q=${q}`}>Customize Mug</a>
 					</div>

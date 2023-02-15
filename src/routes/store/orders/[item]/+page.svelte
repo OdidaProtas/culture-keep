@@ -86,7 +86,7 @@
 		<div class="grid sm:grid-cols-1 lg:grid-cols-2 md:grid-cols-2 gap-4">
 			{#each data.order?.items ?? [] as item}
 				<div class="mt-2 bg-blue-200 p-2 rounded-lg">
-					<Hoodie frontWord={item.word} />
+					<Hoodie carouselOff={true } frontWord={item.word} />
 					<p>Color: {item.color}</p>
 					<p>Quantity: {item.quantity}</p>
 					<p>Size: {item.size}</p>

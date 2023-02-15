@@ -9,7 +9,7 @@
 	<main>
 		<slot />
 	</main>
-	<div class="mt-16" >
+	<div class="mt-16">
 		<footer
 			class="p-4 bg-white  shadow md:flex md:items-center md:justify-between md:p-6 dark:bg-gray-800"
 		>
@@ -26,6 +26,15 @@
 			</ul>
 		</footer>
 	</div>
+
+	<!-- <div class="fixed z-50 bg-slate-800 text-white p-3 w-96 bottom-9 left-4 rounded-lg">
+		<h3 class="text-lg">Cookies</h3>
+		<p>
+			This site uses cookies to serve you better. We do store cookies used to track your
+			activities accross websites.
+		</p>
+		<button class="bg-blue-300 mt-3 text-black text-lg rounded-xl px-4 py-2">Accept</button>
+	</div> -->
 </div>
 
 <style>

@@ -6,16 +6,92 @@
 	export let frontWord;
 	export let textColor = 'white';
 	export let thumbnail = false;
+	export let carouselOff = false;
+
+	export let color = 'blue';
 
 	import { page } from '$app/stores';
+	import axios from 'axios';
+	import { onMount } from 'svelte';
 	let q = $page.url.searchParams.get('q');
 
-	import hoodie from '../../../../lib/assets/hoodie.png';
+	const user = $page.data.session?.user?.name;
+
+	let words = [];
+
+	let colors = ['blue', 'white', 'black', 'yellow', 'pink', 'gray', 'red', 'green'];
+	onMount(() => {
+		if (!carouselOff) {
+			axios.get('/word').then(({ data }) => {
+				words = [
+					...data?.split(','),
+					q ? q : 'Oyieyo chami to kudhi',
+					'Custom text',
+					'Jaluo oksechi',
+					'Visit Kondele',
+					user ? user : 'Your name',
+					'Mi amor',
+					'Dreamville',
+					'Sveltekit',
+					'Dreamer',
+					'Visionary',
+					'Still Dre',
+					'Svelte > React',
+					'Thriving Luos',
+					'Kwach',
+					'Wuod Chris',
+					'Nyar Seme',
+					'JS Guru'
+				];
+			});
+			setInterval(() => {
+				frontWord = words[Math.round(Math.random() * words.length)];
+			}, 3000);
+			setInterval(() => {
+				color = colors[Math.floor(Math.random() * colors.length)];
+				if (color === 'white') {
+					textColor = 'gray';
+				} else textColor = 'white';
+			}, 4200);
+		}
+	});
+
+	import hoodieBlue from '../../../../lib/assets/hoodie-blue.png';
+	import hoodieWhite from '../../../../lib/assets/hoodie-white.png';
+	import hoodieBlack from '../../../../lib/assets/hoodie-black.png';
+	import hoodieYellow from '../../../../lib/assets/hoodie-yellow.png';
+	import hoodiePink from '../../../../lib/assets/hoodie-pink.png';
+	import hoodieGray from '../../../../lib/assets/hoodie-gray.png';
+	import hoodieRed from '../../../../lib/assets/hoodie-red.png';
+	import hoodieGreen from '../../../../lib/assets/hoodie-green.png';
 </script>
 
 <div>
 	<div style="position: relative; width: fit-content">
-		<img class="rounded-lg" width={500} src={hoodie} alt="" />
+		{#if color === 'blue'}
+			<img class="rounded-lg" width={500} src={hoodieBlue} alt="" />
+		{/if}
+		{#if color === 'white'}
+			<img class="rounded-lg" width={500} src={hoodieWhite} alt="" />
+		{/if}
+		{#if color === 'black'}
+			<img class="rounded-lg" width={500} src={hoodieBlack} alt="" />
+		{/if}
+		{#if color === 'yellow'}
+			<img class="rounded-lg" width={500} src={hoodieYellow} alt="" />
+		{/if}
+		{#if color === 'pink'}
+			<img class="rounded-lg" width={500} src={hoodiePink} alt="" />
+		{/if}
+		{#if color === 'gray'}
+			<img class="rounded-lg" width={500} src={hoodieGray} alt="" />
+		{/if}
+		{#if color === 'red'}
+			<img class="rounded-lg" width={500} src={hoodieRed} alt="" />
+		{/if}
+		{#if color === 'green'}
+			<img class="rounded-lg" width={500} src={hoodieGreen} alt="" />
+		{/if}
 		<div
 			style="
 			position: absolute;
@@ -38,8 +114,8 @@
 				font-size: x-large;
 				text-align: center;
 			  "
-						class={`text-xs text-${textColor} lg:text-lg md:text-lg`}
-					>
+			  class={`text-xs text-${textColor}-500 lg:text-lg md:text-lg`}
+			  >
 						{frontWord ?? 'Oyieyo chami to kudhi'}
 					</p>
 				</div>

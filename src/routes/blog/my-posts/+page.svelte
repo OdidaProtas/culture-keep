@@ -49,7 +49,6 @@
 			{#each data.posts as post}
 				<a class="text-black  " style="text-decoration:none" href={`/blog/${post.id}`}>
 					<div class="bg-blue-200 p-3 rounded-lg cursor-pointer">
-						<img src="/" alt="Post cover imahe" />
 						<h6 class="text-lg">{post.title}</h6>
 						<p class="mt-2">1 min read</p>
 					</div></a

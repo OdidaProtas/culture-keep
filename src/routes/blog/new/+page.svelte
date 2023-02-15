@@ -39,29 +39,38 @@
 
 	let editor;
 
-	export let toolbarOptions = [
-		[
-			{ header: 1 },
-			{ header: 2 },
-			{ header: 3 },
-			{ header: 4 },
-			{ header: 5 },
-			{ header: 6 },
-			'blockquote',
-			'link'
+	export let toolbarOptions = {
+		container: [
+			[
+				{ header: 1 },
+				{ header: 2 },
+				{ header: 3 },
+				{ header: 4 },
+				{ header: 5 },
+				{ header: 6 },
+				'blockquote',
+				'link'
+			],
+			['bold', 'italic', 'underline', 'strike'],
+			[{ list: 'ordered' }, { list: 'ordered' }],
+			[{ align: [] }],
+			['image'],
+			['clean'],
+			[{ indent: '-1' }, { indent: '+1' }] // outdent/indent
 		],
-		['bold', 'italic', 'underline', 'strike'],
-		[{ list: 'ordered' }, { list: 'ordered' }],
-		[{ align: [] }],
-		['clean']
-	];
+		handlers: {
+			image: imageHandler
+		}
+	};
 
 	let content;
+
+	let quill;
 
 	onMount(async () => {
 		const { default: Quill } = await import('quill');
 
-		let quill = new Quill(editor, {
+		quill = new Quill(editor, {
 			modules: {
 				toolbar: toolbarOptions
 			},
@@ -71,8 +80,23 @@
 
 		quill.on('text-change', function (delta, oldDelta, source) {
 			content = quill.root.innerHTML;
+			console.log(quill.root.innerHTML);
 		});
 	});
+
+	function imageHandler() {
+		const input = document.createElement('input');
+		input.setAttribute('type', 'file');
+		input.setAttribute('accept', 'image/*');
+		input.click();
+		input.onchange = async function () {
+			const file = input.files[0];
+			const files = await uploadCloudinary([{ fileData: file, field: 'hh' }]);
+			const url = files[0].url;
+			const range = quill.getSelection();
+			quill.insertEmbed(range.index, 'image', url);
+		};
+	}
 </script>
 
 <svelte:head>
@@ -95,8 +119,8 @@
 	</div>
 {/if}
 
-{#if true}
-	<div class="">
+{#if user && isAdmin(user?.email)}
+	<div class="lg:mx-48">
 		{#if form?.success}
 			<div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4" role="alert">
 				<p class="font-bold">Success</p>

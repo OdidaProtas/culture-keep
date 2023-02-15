@@ -11,20 +11,22 @@ export const actions = {
 
         const user = session?.user
 
+
         if (user) {
-            prisma.student.create({
+            const student = await prisma.student.create({
                 data: {
                     email: user.email
                 }
             })
+            return { success: true, ...student }
         }
-        else throw redirect(302, "/auth/signin")
+        throw redirect(302, "/auth/signin")
 
     }
 }
 
 export async function load({ locals }) {
-    const session = locals.getSession()
+    const session = await locals.getSession()
     const user = session?.user
 
     const student = await prisma.student.findFirst({

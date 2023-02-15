@@ -5,7 +5,6 @@
 //@ts-nocheck
 
 export function uploadCloudinary(files = []) {
-	console.log(files)
 	return new Promise((resolve) => {
 		let uploads: any = [];
 		files.forEach((file) => {
