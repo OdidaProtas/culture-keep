@@ -18,9 +18,8 @@ export const load = async ({ url, cookies }) => {
 
 /** @type {import('./$types').Actions} */
 export const actions = {
-    default: async ({ cookies, request, url }) => {
+    remove: async ({ cookies, request, url }) => {
         const data = await request.formData();
-        let basketId = cookies.get("device-id")
 
         const id = String(data.get("id"))
 
@@ -29,5 +28,46 @@ export const actions = {
         })
 
 
+        return { removed: true }
+    },
+    async increase({ request }) {
+        const data = await request.formData();
+
+        const id = String(data.get("id"))
+
+        const item = await prisma.orderItem.findFirst({
+            where: { id }
+        })
+
+
+        await prisma.orderItem.update({
+            where: {
+                id
+            },
+            data: { quantity: item.quantity + 1 }
+        })
+
+
+    },
+    async decrease({ request }) {
+        const data = await request.formData();
+
+        const id = String(data.get("id"))
+
+        const item = await prisma.orderItem.findFirst({
+            where: { id }
+        })
+
+        if (item.quantity > 1)
+            await prisma.orderItem.update({
+                where: {
+                    id
+                },
+                data: { quantity: item.quantity - 1 }
+            })
+        else
+            await prisma.orderItem.delete({
+                where: { id }
+            })
     }
 };

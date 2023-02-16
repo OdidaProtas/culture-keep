@@ -5,6 +5,11 @@
 
 <div class="text-column">
 	<h1>About</h1>
+	<p>
+		REDISCOVERING the HISTORY, CULTURE & FOLKLORE of the LUO of East & Central Africa.
+
+
+	</p>
 	<p class="mt-4">
 		The <a href="/search?q=luo">Luo</a> , (also spelled Lwo) are several ethnically and linguistically
 		related Nilo-Semitic ethnic groups that inhabit an area ranging from Egypt and Sudan to South Sudan

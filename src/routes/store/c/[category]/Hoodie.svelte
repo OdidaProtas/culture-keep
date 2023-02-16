@@ -41,7 +41,9 @@
 					'Kwach',
 					'Wuod Chris',
 					'Nyar Seme',
-					'JS Guru'
+					'JS Guru',
+					'Nyar Mbita',
+					'Kogalo Massive'
 				];
 			});
 			setInterval(() => {
@@ -111,11 +113,10 @@
 					<p
 						style="
 				margin-top: -60px;
-				font-size: x-large;
 				text-align: center;
 			  "
-			  class={`text-xs text-${textColor}-500 lg:text-lg md:text-lg`}
-			  >
+						class={`text-xs sm:text-3xl text-${textColor}-500 lg:text-lg md:text-xs`}
+					>
 						{frontWord ?? 'Oyieyo chami to kudhi'}
 					</p>
 				</div>

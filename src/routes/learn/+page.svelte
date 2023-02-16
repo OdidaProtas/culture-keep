@@ -5,7 +5,7 @@
 	export let data = { user: {} };
 </script>
 
-{#if data?.student && data.student.status === 'pending-confirmation'}
+{#if user &&  data?.student && data.student.status === 'pending-confirmation'}
 	<div class="p-2 rounded-lg-bg-green-200 text-center text-lg mt-20 text-black">
 		<p class="mb-4 text-lg">Hello {user?.name?.split(' ')[0]}</p>
 		<p>Your request for enrollment has been received.</p>
@@ -13,7 +13,7 @@
 		<div class="mt-20 ">
 			<a class="hover:no-underline" href="/">Search words</a>
 			<a class="ml-9 hover:no-underline" href="/store">Shop customized wear</a>
-			<a class="ml-9 hover:no-underline" href="/store">Play a guessing game</a>
+			<a class="ml-9 hover:no-underline" href="/sverdle">Play a guessing game</a>
 		</div>
 	</div>
 {/if}
@@ -31,6 +31,7 @@
 			</div>
 		</div>
 	{/if}
+	
 {/if}
 
 {#if !user}

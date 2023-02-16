@@ -40,8 +40,8 @@
 				<a
 					href="/admin"
 					on:click={toggle}
-					class="relative text-white inline-flex items-center w-full px-4 py-2 text-sm font-medium border-b border-gray-200 rounded-t-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white"
-				>
+					class="relative hover:no-underline rounded inline-flex items-center w-full px-4 py-2 text-lg font-medium rounded-b-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white"
+					>
 					<svg
 						aria-hidden="true"
 						class="w-4 h-4 mr-2 fill-current"
@@ -59,8 +59,8 @@
 				<a
 					on:click={toggle}
 					href="/blog/my-posts"
-					class="relative text-white inline-flex items-center w-full px-4 py-2 text-sm font-medium border-b border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white"
-				>
+					class="relative hover:no-underline rounded inline-flex items-center w-full px-4 py-2 text-lg font-medium rounded-b-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white"
+					>
 					<svg
 						aria-hidden="true"
 						class="w-4 h-4 mr-2 fill-current"
@@ -78,8 +78,8 @@
 				<a
 					on:click={toggle}
 					href="/blog/new"
-					class="relative text-white inline-flex items-center w-full px-4 py-2 text-sm font-medium border-b border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white"
-				>
+					class="relative hover:no-underline rounded inline-flex items-center w-full px-4 py-2 text-lg font-medium rounded-b-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white"
+					>
 					<svg
 						aria-hidden="true"
 						class="w-4 h-4 mr-2 fill-current"
@@ -97,8 +97,8 @@
 				<a
 					on:click={toggle}
 					href="/blog/drafts"
-					class="relative text-white no-underline inline-flex items-center w-full px-4 py-2 text-sm font-medium border-b border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white"
-				>
+					class="relative hover:no-underline rounded inline-flex items-center w-full px-4 py-2 text-lg font-medium rounded-b-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white"
+					>
 					<svg
 						aria-hidden="true"
 						class="w-4 h-4 mr-2 fill-current"
@@ -117,8 +117,8 @@
 			<a
 				on:click={toggle}
 				href={`/store/orders`}
-				class="relative hover:no-underline text-white no-underline inline-flex items-center w-full px-4 py-2 text-sm font-medium border-b border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white"
-			>
+				class="relative hover:no-underline rounded inline-flex items-center w-full px-4 py-2 text-lg font-medium rounded-b-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white"
+				>
 				<svg
 					aria-hidden="true"
 					class="w-4 h-4 mr-2 fill-current"
@@ -135,8 +135,8 @@
 			<a
 				style="text-transform: none; text-decoration:none"
 				href="/define"
-				class="relative inline-flex text-white items-center w-full px-4 py-2 text-sm font-medium rounded-b-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white"
-			>
+				class="relative hover:no-underline rounded inline-flex items-center w-full px-4 py-2 text-lg font-medium rounded-b-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white"
+				>
 				<svg
 					aria-hidden="true"
 					class="w-4 h-4 mr-2 fill-current"
@@ -156,8 +156,8 @@
 					if (user) signOut();
 					else signIn('google');
 				}}
-				class="relative inline-flex items-center w-full px-4 py-2 text-sm font-medium rounded-b-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white"
-			>
+					class="relative hover:no-underline rounded inline-flex items-center w-full px-4 py-2 text-lg font-medium rounded-b-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:border-gray-600 dark:hover:bg-gray-600 dark:hover:text-white dark:focus:ring-gray-500 dark:focus:text-white"
+					>
 				<svg
 					aria-hidden="true"
 					class="w-4 h-4 mr-2 fill-current"

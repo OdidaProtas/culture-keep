@@ -1,12 +1,11 @@
 <script>
 	// @ts-nocheck
-	function closeCart() {
-		history.back();
-	}
+
+	import { error } from '@sveltejs/kit';
 
 	export let data = { payment: '' };
 	let phone = '';
-
+	export let form = { error: false };
 </script>
 
 <form method="POST">
@@ -40,9 +39,28 @@
 						<div class="flex h-full  flex-col overflow-y-scroll bg-white shadow-xl">
 							<div class="flex-1 overflow-y-auto pt-6 px-4 sm:px-6">
 								<div class="flex items-start justify-between">
-									<h2 class="text-lg font-medium text-gray-900" id="slide-over-title">
-										Order Payment
-									</h2>
+									<div>
+										<h3 class="text-lg font-medium mb-4">Pay with MPesa</h3>
+
+										{#if form?.error}
+											<div class="bg-red-200 p-2 rounded my-3 mt-20">
+												<p>
+													An error occured with your request. Try again or <a href="/support"
+														>contact support</a
+													> for help
+												</p>
+											</div>
+										{/if}
+										
+										{#if form?.success}
+											<div class="bg-green-200 p-2 rounded my-3 mt-20">
+												<p>
+													Payment request has been sent. Please enter your Mpesa pin to complete checkout
+												</p>
+											</div>
+										{/if}
+									</div>
+
 									<div class="ml-3 flex h-7 items-center">
 										<a
 											href="/store/basket"
@@ -70,10 +88,8 @@
 									</div>
 								</div>
 
-								<div class="mt-8 w-full">
+								<div class="mt-4 w-full">
 									<div class=" pt-6 ">
-										<h3 class="text-lg font-medium mb-4">Pay with MPesa</h3>
-
 										<!-- {#if data.payment?.status === 'error'}
 											<div class="p-2 bg-red-200 rounded-lg mb-3">
 												<p class="text-lg">Request failed</p>
@@ -84,36 +100,48 @@
 											</div>
 										{/if} -->
 										<div class="mb-4">
+											<label for="phone">Phone number to receive payment request</label>
 											<input
-												class="w-full border border-gray-400 p-2"
+												class="w-full mt-4 border rounded-xl border-gray-400 p-2"
 												id="phone"
 												name="phone"
 												type="tel"
 												required
 												bind:value={phone}
-												placeholder="254712345678"
+												placeholder="0712345678"
 											/>
 										</div>
 									</div>
 								</div>
 								<div>
-									{#if data.payment}
+									{#if !form?.error}
 										<div class="p-2 bg-blue-200 rounded-lg">
-											<p class="text-lg">You will receive a prompt to enter your MPESA Pin</p>
 											<small color="text-blue-800">
 												Your order will be confirmed upon successful payment.
 											</small>
 											<div class="mt-4">
-												<a href={`/store/orders`}>Track your order status here</a>
+												<a target="blank" class="hover:no-underline text-lg" href={`/store/orders`}
+													>Track your order status here</a
+												>
 											</div>
 										</div>
 									{/if}
 								</div>
 							</div>
 
-							<div class="border-t  border-gray-200 py-6 px-4 sm:px-6">
-								<div class="mt-6">
-									<button class="bg-green-800 text-white rounded-lg p-2">Request payment</button>
+							<div class="border-t border-gray-200 py-6 px-4 sm:px-6">
+								<div class="mt-6 w-full">
+									{#if phone}
+										<button
+											class="flex items-center w-full justify-center hover:no-underline rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+											>Request payment</button
+										>
+									{:else}
+										<span
+											class="flex items-center hover:cursor-not-allowed justify-center rounded-md border border-transparent bg-gray-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-gray-700"
+											>Request payment</span
+										>
+									{/if}
 								</div>
 							</div>
 						</div>

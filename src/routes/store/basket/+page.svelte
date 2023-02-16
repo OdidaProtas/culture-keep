@@ -1,7 +1,6 @@
 <script>
 	// @ts-nocheck
 
-
 	import Hoodie from '../c/[category]/Hoodie.svelte';
 	import Mug from '../c/[category]/Mug.svelte';
 	import Tshirt from '../c/[category]/Tshirt.svelte';
@@ -13,9 +12,8 @@
 
 	const orderItems = data.order?.items ?? [];
 	const totalAmount = orderItems?.reduce((prev, curr) => {
-		return prev + curr.price;
+		return prev + (curr.price * curr.quantity);
 	}, 0);
-
 </script>
 
 <div class="relative z-10" aria-labelledby="slide-over-title" role="dialog" aria-modal="true">
@@ -88,11 +86,11 @@
 													class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200"
 												>
 													{#if item.type === 'hoodies'}
-														<Hoodie thumbnail={true} />
+														<Hoodie carouselOff={true} color={item.color} thumbnail={true} />
 													{:else if item.type === 'tshirts'}
-														<Tshirt thumbnail={true} />
+														<Tshirt carouselOff={true} color={item.color} thumbnail={true} />
 													{:else}
-														<Mug thumbnail={true} />
+														<Mug carouselOff={true} color={item.color} thumbnail={true} />
 													{/if}
 												</div>
 
@@ -102,18 +100,36 @@
 															<h3>
 																{item.word}
 															</h3>
-															<p class="ml-4">KES {item.price}</p>
+															<p class="ml-4">KES {item.price * item.quantity}</p>
 														</div>
-														<p class="mt-1 text-sm text-gray-500">Color: {item.color}</p>
-														{#if !(item.type === 'mugs')}
-															<p class="mt-1 text-sm text-gray-500">Size: {item.size}</p>
-														{/if}
+														<div class="flex justify-between mt-3">
+															<div>
+																{#if !(item.type === 'mugs')}
+																	<p class="mt-1 text-sm text-gray-500">Size: {item.size}</p>
+																{/if}
+															</div>
+															<div class="flex" >
+																<form action="?/decrease" method="POST">
+																	<input id="id" name="id" value={item.id} type="hidden" />
+																	<button
+																		class="bg-gray-500 text-white  px-4 mr-3 rounded-full -pt-2"
+																		>-</button
+																	>
+																</form>
+																<form action="?/increase" method="POST">
+																	<input id="id" name="id" value={item.id} type="hidden" />
+																	<button class="bg-gray-500 text-white  px-4 rounded-full"
+																		>+</button
+																	>
+																</form>
+															</div>
+														</div>
 													</div>
 													<div class="flex flex-1 items-end justify-between text-sm">
-														<p class="text-gray-500">Qty {item.quantity}</p>
+														<p class="text-gray-500">Qty {item.quantity} x KES{item.price}</p>
 
 														<div class="flex">
-															<form method="POST">
+															<form action="?/remove" method="POST">
 																<input id="id" name="id" value={item.id} type="hidden" />
 																<button
 																	type="submit"
@@ -141,12 +157,12 @@
 								{#if orderItems.length > 0}
 									<a
 										href={`/store/checkout`}
-										class="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+										class="flex items-center justify-center hover:no-underline rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
 										>Checkout</a
 									>
 								{:else}
 									<span
-										class="flex items-center justify-center rounded-md border border-transparent bg-gray-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-gray-700"
+										class="flex items-center hover:cursor-not-allowed justify-center rounded-md border border-transparent bg-gray-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-gray-700"
 										>Checkout</span
 									>
 								{/if}

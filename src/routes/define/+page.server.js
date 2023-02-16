@@ -20,7 +20,7 @@ export const actions = {
 		const slug = convertToSlug(word)
 
 
-		if (!JSON.parse(edit ?? "")) {
+		if (!edit) {
 			const entry = await prisma.definition.create({
 				data: { word, definition, dialect, example, english, swahili, plural, imageUrl, slug }
 			});
@@ -37,7 +37,7 @@ export const actions = {
 
 			return { entry, success: true }
 		}
-		if (JSON.parse(edit ?? "")) {
+		if (edit) {
 			const q = url.searchParams.get("word")
 			const entry = await prisma.definition.update({
 				where: { word: q },

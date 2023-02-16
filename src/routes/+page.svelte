@@ -11,12 +11,9 @@
 </svelte:head>
 
 <section class="lg:mx-18">
-	<span class=" text-center ">
-		<h1
-			class="mb-2 mt-9 text-2xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-3xl dark:text-gray-700"
-		>
-			Dholuo dictionary
-		</h1>
+	<span class="text-center pt-9 ">
+		<h1 class="mt-9" >Dholuo Dictionary</h1>
+
 
 		<form class="lg:px-48" action="/search">
 			<label

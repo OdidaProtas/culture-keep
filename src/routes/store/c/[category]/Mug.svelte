@@ -53,7 +53,7 @@
 					color = 'gray';
 				}
 				if (color === 'white') {
-					textColor = 'gray';
+					textColor = 'black';
 				} else textColor = 'white';
 			}, 4800);
 		}

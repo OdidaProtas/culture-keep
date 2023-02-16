@@ -136,7 +136,7 @@
 					{#each data.more as word}
 						<div class="my-3">
 							{#if word.coverImage}
-								<img style="height:180px" src={word.coverImage} alt="" />
+								<img style="height:100px" src={word.coverImage} alt="" />
 							{/if}
 							<a class="hover:no-underline" href={`/blog/${word.id}`}>
 								{word.title}

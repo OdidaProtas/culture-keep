@@ -24,9 +24,9 @@
 {#if true}
 	<div>
 		{#if !hasOrders}
-			<div class="text-center text-lg lg:mt-9">
-				<p>You have not made any orders with us</p>
-				<a href={`/store`}> Visit store </a>
+			<div class="text-center text-lg pb-96 lg:mt-9">
+				<p class="mb-4" >You have not made any orders</p>
+				<a class="text-lg hover:no-underline"  href={`/store`}> Visit store </a>
 			</div>
 		{/if}
 

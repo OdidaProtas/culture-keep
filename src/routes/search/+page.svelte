@@ -47,8 +47,12 @@
 </svelte:head>
 
 {#if data.flagged}
-	<div class="bg-red-200 p-3 rounded-3xl text-gray-800 lg:mx-48 text-lg">
-		<p>This word has been flagged as a potentially inaccurate / misleading.</p>
+	<div class="bg-red-200 p-3 rounded-3xl  text-gray-800 lg:mx-64 text-lg">
+		<p class="mb-3" >
+			This word / phrase has been flagged as a potentially inaccurate / misleading and is under
+			review.
+		</p>
+		<a class="hover:no-underline mt-3" href={`/define?word=${q}`}>Add correct definition</a>
 	</div>
 {/if}
 
@@ -96,11 +100,11 @@
 		{/if}
 	{/if}
 
-	{#if data.word}
+	{#if data.word && !data.flagged}
 		<form class="w-full" method="POST">
 			<input type="hidden" value={!data.flagged} id="flag" name="flag" />
 			<input type="hidden" value={'flag'} id="action" name="action" />
-			<button class="bg-red-500 p-2 mt-4 rounded-3xl ml-2 text-sm text-white"
+			<button class="bg-red-500 p-2 mt-4 rounded-3xl ml-2  px-5  text-sm text-white"
 				>{data.flagged ? 'Undo flag' : 'Flag word'}
 			</button>
 		</form>
@@ -114,13 +118,13 @@
 				<div>
 					<Hoodie carouselOff frontWord={uppercased} />
 					<div class="text-center mt-3">
-						<a href={`/store/c/hoodies?q=${q}`}>Customize Hoodie</a>
+						<a class="text-lg hover:no-underline" href={`/store/c/hoodies?q=${q}`}>Customize Hoodie</a>
 					</div>
 				</div>
 				<div>
 					<Tshirt carouselOff frontWord={uppercased} />
 					<div class="text-center mt-1">
-						<a href={`/store/c/tshirts?q=${q}`}>Customize Tshirt</a>
+						<a class="text-lg hover:no-underline"  href={`/store/c/tshirts?q=${q}`}>Customize Tshirt</a>
 					</div>
 				</div>
 			</div>
@@ -128,7 +132,7 @@
 				<div>
 					<Mug carouselOff frontWord={uppercased} />
 					<div class="text-center mt-3">
-						<a href={`/store/c/mugs?q=${q}`}>Customize Mug</a>
+						<a class="text-lg hover:no-underline"  href={`/store/c/mugs?q=${q}`}>Customize Mug</a>
 					</div>
 				</div>
 			</div>

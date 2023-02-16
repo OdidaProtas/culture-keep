@@ -2,10 +2,12 @@
 	// @ts-nocheck
 
 	import Hoodie from '../../c/[category]/Hoodie.svelte';
+	import Mug from '../../c/[category]/Mug.svelte';
+	import Tshirt from '../../c/[category]/Tshirt.svelte';
 
 	export let data = { order: {} };
 	const totalAmount = data.order?.items?.reduce((prev, curr) => {
-		return prev + curr.price;
+		return prev + curr.price * curr.quantity;
 	}, 0);
 
 	let payment = data.order?.payment;
@@ -49,17 +51,10 @@
 	</div>
 {/if}
 
-
 <div>
 	<h2>Order REF: <span class="text-lg">{data?.order?.id}</span></h2>
 	<p>
-		Order Status: <span class="text-lg">
-			{data?.order?.status === 'placed'
-				? 'Pending confirmation'
-				: data?.order?.status === 'draft'
-				? 'Draft order'
-				: 'Confirmed'}
-		</span>
+		Order Status: {data.order.status}
 	</p>
 	<p>Order Amount: <span class="text-lg">KES {totalAmount}</span></p>
 	<hr />
@@ -75,7 +70,13 @@
 		<div class="grid sm:grid-cols-1 lg:grid-cols-2 md:grid-cols-2 gap-4">
 			{#each data.order?.items ?? [] as item}
 				<div class="mt-2 bg-blue-200 p-2 rounded-lg">
-					<Hoodie carouselOff={true } frontWord={item.word} />
+					{#if item.type === 'hoodies'}
+						<Hoodie carouselOff={true} textColor={item.textColor} frontWord={item.word} />
+					{:else if item.type === 'tshirts'}
+						<Tshirt carouselOff={true} textColor={item.textColor} frontWord={item.word} />
+					{:else}
+						<Mug carouselOff={true} textColor={item.textColor} frontWord={item.word} />
+					{/if}
 					<p>Color: {item.color}</p>
 					<p>Quantity: {item.quantity}</p>
 					<p>Size: {item.size}</p>

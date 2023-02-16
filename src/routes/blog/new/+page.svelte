@@ -129,7 +129,7 @@
 		{/if}
 		<h1 class="mt-9 mb-3">New Post</h1>
 		<p>
-			Please review <a href="/guidelines">Our community guidelines</a> before writing your blog post.
+			Please review <a href="/guidelines">Our content guidelines</a> before writing your blog post.
 			Here's the short version: Share definitions that other people will find meaningful and never post
 			hate speech or people’s personal information.
 		</p>

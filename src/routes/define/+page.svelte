@@ -87,7 +87,9 @@
 </div>
 
 {#if form?.success}
-	<div class="bg-green-200 p-2 rounded-xl">Action successful! Item saved</div>
+	<div class="bg-green-200 p-2 rounded-xl lg:mx-96 mt-4">
+		Congratulations. Definition has been added.
+	</div>
 {/if}
 
 {#if !user}
@@ -160,7 +162,7 @@
 			</div>
 			<div class="mb-6">
 				<label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-500"
-					>Definition</label
+					>Definition (optional)</label
 				>
 				<textarea
 					id="definition"

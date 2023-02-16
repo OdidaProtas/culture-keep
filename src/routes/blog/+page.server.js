@@ -7,9 +7,10 @@ export async function load() {
 
     const posts = await prisma.blogContent.findMany({ take: 100, where: { published: true } })
 
-    let featured = posts.slice(0, 4)
-    let morePosts = posts.slice(5, 12)
-    let restOfPosts = posts.slice(13, 100)
+    let featured = [...posts].slice(0, 4)
+    let morePosts = [...posts].slice(4, 12)
+    let restOfPosts = [...posts].slice(13, 100)
+
 
     return { posts: featured, more: morePosts, rest: restOfPosts }
 }

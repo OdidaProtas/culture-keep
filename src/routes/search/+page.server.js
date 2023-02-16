@@ -7,7 +7,7 @@ export async function load({ params, url }) {
 	let definition
 
 	definition = await prisma.definition.findFirst({
-		where: { word: String(q).toLowerCase(), deleted: false },
+		where: { word: String(q).trim().toLowerCase(), deleted: false },
 		include: {
 			Variations: true
 		}

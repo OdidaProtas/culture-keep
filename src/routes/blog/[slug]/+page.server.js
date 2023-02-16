@@ -2,19 +2,29 @@
 
 import { PrismaClient } from '@prisma/client'
 import { error, redirect } from '@sveltejs/kit'
+import { isAdmin } from '../../../db/authbodge';
 
 import prisma from '../../../db/prisma';
 
 
-export async function load({ url, params }) {
+export async function load({ url, params, locals }) {
     const pathname = String(url.pathname)
     const param = params.slug
+
+
+    const session = await locals.getSession()
 
 
     let post = await prisma.blogContent.findFirst({
         where: { id: param },
         include: { comments: true }
     })
+
+
+    if (!post.published && !isAdmin(session?.user?.email)) {
+        throw error(403, "This post hasn't been published and is only visible to author")
+    }
+
 
     let other = await prisma.blogContent.findMany({
         take: 10
@@ -79,6 +89,6 @@ export const actions = {
                 authorEmail: session.user.email,
             }
         })
-        return {...comment, success:true}
+        return { ...comment, success: true }
     }
 };

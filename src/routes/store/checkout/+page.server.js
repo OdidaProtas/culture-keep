@@ -1,6 +1,7 @@
 // @ts-nocheck
 import { redirect } from '@sveltejs/kit';
 import prisma from '../../../db/prisma';
+import { basket } from '../basket';
 
 /** @type {import('./$types').Actions} */
 export const actions = {
@@ -16,7 +17,8 @@ export const actions = {
             where: {
                 fullfiled: false,
                 device,
-                status: "draft"
+                status: "draft",
+                payment: null
             }
         })
 
@@ -34,7 +36,7 @@ export const actions = {
             })
         }
 
-
+        return { success: true }
     }
 };
 
@@ -46,6 +48,9 @@ export async function load({ url, cookies }) {
             fullfiled: false,
             status: "draft",
             payment: null
+        },
+        include: {
+            items: true
         }
     })
     if (!order)

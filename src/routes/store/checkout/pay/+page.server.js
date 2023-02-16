@@ -26,6 +26,9 @@ export const actions = {
         })
 
 
+        if (!basket) {
+            return { error: true }
+        }
 
 
         let orderAmount = (basket?.items ?? []).reduce((prev, curr) => {
@@ -37,7 +40,7 @@ export const actions = {
             phone,
             accountReference: basket?.id,
             amount: orderAmount,
-            transactionDesc: `Dholuo Dictionary Merch MPESA PAYMENT - ${phone} - ${basket.id}`
+            transactionDesc: `Dholuo Dictionary Merch MPESA PAYMENT - ${phone} - ${basket?.id}`
         })
 
         const [stkPushResponse, stkPushError] = await handleException(stkPushPromise)
@@ -45,26 +48,7 @@ export const actions = {
 
 
         if (stkPushError) {
-            const payment = await prisma.payment.create({
-                data: {
-                    phone,
-                    status: "error",
-                    timeStamp: getTimestamp(),
-                    responseCode: "1111"
-                }
-            })
-            await prisma.order.update({
-                where: {
-                    id: basket.id
-                },
-                data: {
-                    paymentId: payment.id
-
-                }
-            })
-
-            throw redirect("302", `/store/orders/${basket.id}`)
-
+            return { error: true }
         }
 
         if (stkPushResponse) {
@@ -90,8 +74,7 @@ export const actions = {
                 }
             })
 
-            throw redirect("302", `/store/orders/${basket.id}`)
-
+            return { success: true }
         }
 
 
@@ -115,11 +98,11 @@ export async function load({ url, cookies }) {
     })
 
 
-    if (!basket)
+    if (!basket || !basket.items.length)
         throw redirect("302", `/store/orders?ref=${basketId}`)
 
     const totalAmount = basket?.items?.reduce((prev, curr) => {
-        return prev + curr.price;
+        return prev + (curr.price * curr.quantity);
     }, 0);
 
     return { payment: { ...basket?.payment, amount: totalAmount } }

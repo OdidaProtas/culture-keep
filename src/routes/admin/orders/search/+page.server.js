@@ -1,9 +1,8 @@
 // @ts-nocheck
-import prisma from "../../../db/prisma";
+import prisma from "../../../../db/prisma";
 
 export async function load({ url }) {
     const status = url.searchParams.get("status")
-    console.log(status)
     if (!status) {
         const orders = await prisma.order.findMany({
             include: {
@@ -24,9 +23,7 @@ export async function load({ url }) {
 
 export const actions = {
     async default() {
-        console.log(
-            "lkjbh"
-        )
+      
         return { success: true }
     }
 }

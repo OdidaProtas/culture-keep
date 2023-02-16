@@ -58,7 +58,6 @@
 	import Tshirt from './c/[category]/Tshirt.svelte';
 	let q = $page.url.searchParams.get('q');
 
-	import mug from '../../lib/assets/mug.jpg';
 	import Mug from './c/[category]/Mug.svelte';
 </script>
 
